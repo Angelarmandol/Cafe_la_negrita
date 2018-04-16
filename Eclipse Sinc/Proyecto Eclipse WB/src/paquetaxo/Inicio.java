@@ -17,6 +17,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ButtonGroup;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import java.awt.Color;
 
 public class Inicio {
 
@@ -53,13 +57,14 @@ public class Inicio {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.getContentPane().setBackground(new Color(255, 153, 51));
 		frame.setType(Type.UTILITY);
-		frame.setBounds(100, 100, 363, 405);
+		frame.setBounds(100, 100, 363, 498);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 163, 327, 33);
+		panel.setBounds(10, 263, 327, 33);
 		frame.getContentPane().add(panel);
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
@@ -96,7 +101,7 @@ public class Inicio {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnIniciar.setBounds(59, 291, 89, 23);
+		btnIniciar.setBounds(57, 408, 89, 23);
 		frame.getContentPane().add(btnIniciar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -108,20 +113,26 @@ public class Inicio {
 			 
 			
 		});
-		btnCancelar.setBounds(205, 291, 89, 23);
+		btnCancelar.setBounds(203, 408, 89, 23);
 		frame.getContentPane().add(btnCancelar);
 		
 		txtUsuario = new JTextField();
 		txtUsuario.setText("Usuario");
-		txtUsuario.setBounds(62, 207, 228, 20);
+		txtUsuario.setBounds(60, 324, 228, 20);
 		frame.getContentPane().add(txtUsuario);
 		txtUsuario.setColumns(10);
 		
 		txtContrasea = new JTextField();
 		txtContrasea.setText("Contrase\u00F1a");
 		txtContrasea.setToolTipText("Contrase\u00F1a");
-		txtContrasea.setBounds(62, 238, 219, 20);
+		txtContrasea.setBounds(60, 355, 219, 20);
 		frame.getContentPane().add(txtContrasea);
 		txtContrasea.setColumns(10);
+		
+		JLabel lblLogo = new JLabel("");
+		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLogo.setIcon(new ImageIcon("C:\\Users\\Angel\\Desktop\\413a04be-da76-4760-8312-cb52616775b9.svg.png"));
+		lblLogo.setBounds(10, 11, 327, 241);
+		frame.getContentPane().add(lblLogo);
 	}
 }
