@@ -32,7 +32,12 @@ public class Inicio {
 	/**
 	 * Launch the application.
 	 */
+	
+
+	Ventanas control = new Ventanas();
 	public static void main(String[] args) {
+
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -56,6 +61,9 @@ public class Inicio {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		
+		
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.getContentPane().setBackground(new Color(255, 153, 51));
@@ -76,6 +84,8 @@ public class Inicio {
 		final JRadioButton rdbtnNewRadioButton = new JRadioButton("Cajero");
 		buttonGroup.add(rdbtnNewRadioButton);
 		panel.add(rdbtnNewRadioButton);
+		final Administracion admin = new Administracion();
+		final EditarProducto ed = new EditarProducto();
 		
 		JButton btnIniciar = new JButton("Iniciar");
 		btnIniciar.addMouseListener(new MouseAdapter() {
@@ -84,7 +94,8 @@ public class Inicio {
 			
 			if(rdbtnNewRadioButton_1.isSelected()) {
 				JOptionPane.showMessageDialog(null, "Inicia jar Administrador");
-			}else {
+				control.mostrarPantallaAdmin();
+				}else {
 				if(rdbtnNewRadioButton.isSelected()) {
 					JOptionPane.showMessageDialog(null, "Inicia jar cajero");
 				}else {
@@ -106,6 +117,10 @@ public class Inicio {
 		frame.getContentPane().add(btnIniciar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnCancelar.addMouseListener(new MouseAdapter() {
  
 			public void mouseClicked(MouseEvent e) {

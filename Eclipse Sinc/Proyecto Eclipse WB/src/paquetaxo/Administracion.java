@@ -18,43 +18,44 @@ import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JDesktopPane;
+import java.awt.Color;
 
 
-public class Administracion {
+public class Administracion extends JFrame{
 
 	private JFrame frmAdministracion;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) {}
+
+	/**
+	 * Create the application.
+	 */
+	
+	public void iniciar(){
+		
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					Administracion window = new Administracion();
-					window.frmAdministracion.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public Administracion() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
+	
+		
 		frmAdministracion = new JFrame();
+		frmAdministracion.setBackground(Color.GREEN);
 		frmAdministracion.setTitle("Administracion");
 		frmAdministracion.setBounds(100, 100, 612, 385);
 		frmAdministracion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		frmAdministracion.setVisible(true);
 		
 		JMenuBar menuBar = new JMenuBar();
 		frmAdministracion.setJMenuBar(menuBar);
@@ -101,5 +102,15 @@ public class Administracion {
 		JMenuItem mntmCalculadora = new JMenuItem("Calculadora");
 		mnHerramientas.add(mntmCalculadora);
 	}
+	public Administracion() {
 
+		
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	
+	private void initialize() {
+	}
+*/
 }

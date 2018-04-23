@@ -22,18 +22,7 @@ public class EditarProducto {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EditarProducto window = new EditarProducto();
-					window.frmEditarProducto.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	public static void main(String[] args) {}
 
 	/**
 	 * Create the application.
@@ -42,16 +31,29 @@ public class EditarProducto {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
+	
+	public void test(){
+		
+
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					EditarProducto window = new EditarProducto();
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	
 		frmEditarProducto = new JFrame();
 		frmEditarProducto.setType(Type.UTILITY);
 		frmEditarProducto.setTitle("Editar Producto");
 		frmEditarProducto.setBounds(100, 100, 635, 407);
 		frmEditarProducto.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmEditarProducto.getContentPane().setLayout(null);
+		
+		frmEditarProducto.setVisible(true);
 		
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
@@ -107,5 +109,12 @@ public class EditarProducto {
 		});
 		btnAceptar.setBounds(364, 333, 126, 23);
 		frmEditarProducto.getContentPane().add(btnAceptar);
+	}
+	
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+	
 	}
 }
