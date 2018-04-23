@@ -57,6 +57,7 @@ public class Inicio {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.getContentPane().setBackground(new Color(255, 153, 51));
 		frame.setType(Type.UTILITY);
 		frame.setBounds(100, 100, 363, 498);
@@ -68,17 +69,17 @@ public class Inicio {
 		frame.getContentPane().add(panel);
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Administrador");
+		final JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Administrador");
 		buttonGroup.add(rdbtnNewRadioButton_1);
 		panel.add(rdbtnNewRadioButton_1);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Cajero");
+		final JRadioButton rdbtnNewRadioButton = new JRadioButton("Cajero");
 		buttonGroup.add(rdbtnNewRadioButton);
 		panel.add(rdbtnNewRadioButton);
 		
 		JButton btnIniciar = new JButton("Iniciar");
 		btnIniciar.addMouseListener(new MouseAdapter() {
-			@Override
+		
 			public void mouseClicked(MouseEvent arg0) {
 			
 			if(rdbtnNewRadioButton_1.isSelected()) {
@@ -106,8 +107,10 @@ public class Inicio {
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addMouseListener(new MouseAdapter() {
-			@Override
+ 
 			public void mouseClicked(MouseEvent e) {
+				
+				System.exit(0);
 			}
 			
 			 
@@ -131,7 +134,7 @@ public class Inicio {
 		
 		JLabel lblLogo = new JLabel("");
 		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogo.setIcon(new ImageIcon("C:\\Users\\Angel\\Desktop\\413a04be-da76-4760-8312-cb52616775b9.svg.png"));
+		lblLogo.setIcon(new ImageIcon("C:\\Users\\Inspiron3647\\Documents\\GitHub\\Cafe_la_negrita\\Eclipse Sinc\\Proyecto Eclipse WB\\src\\Imagenes\\LOGOHD.png"));
 		lblLogo.setBounds(10, 11, 327, 241);
 		frame.getContentPane().add(lblLogo);
 	}

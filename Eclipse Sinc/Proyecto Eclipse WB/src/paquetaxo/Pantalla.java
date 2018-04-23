@@ -47,20 +47,20 @@ public class Pantalla {
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.getContentPane().setLayout(null);
 		
-		JPanel panel = new JPanel();
+		final JPanel panel = new JPanel();
 		panel.addMouseListener(new MouseAdapter() {
-			@Override
+			 
 			public void mouseClicked(MouseEvent arg0) {
 				System.exit(0);
 			}
 			 
 			 
-			@Override
+		 
 			public void mouseEntered(MouseEvent e) {
 				panel.setBackground(Color.RED);
 			}
 			 
-			@Override
+			 
 			public void mouseExited(MouseEvent e) {
 				panel.setBackground(Color.WHITE);
 			}
