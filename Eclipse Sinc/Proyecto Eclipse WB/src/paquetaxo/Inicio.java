@@ -134,7 +134,7 @@ public class Inicio {
 		
 		JLabel lblLogo = new JLabel("");
 		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogo.setIcon(new ImageIcon("C:\\Users\\Inspiron3647\\Documents\\GitHub\\Cafe_la_negrita\\Eclipse Sinc\\Proyecto Eclipse WB\\src\\Imagenes\\LOGOHD.png"));
+		lblLogo.setIcon(new ImageIcon("C:\\Users\\Inspiron3647\\Documents\\GitHub\\Cafe_la_negrita\\Eclipse Sinc\\Proyecto Eclipse WB\\src\\Imagenes\\logorzics.png"));
 		lblLogo.setBounds(10, 11, 327, 241);
 		frame.getContentPane().add(lblLogo);
 	}
