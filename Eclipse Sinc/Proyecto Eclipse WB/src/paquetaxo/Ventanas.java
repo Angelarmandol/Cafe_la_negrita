@@ -46,6 +46,7 @@ public class Ventanas {
 	
 	Administracion pantallaAdmin = new Administracion();
 	EditarProducto PantallaEditar = new EditarProducto();
+	Cajero pantallaCaja=new Cajero();
 	
 	
 	
@@ -59,6 +60,15 @@ public class Ventanas {
 		pantallaAdmin.setVisible(false);
 	 
 	}// fin de metodo de mostrar pantalla
+	
+	
+	public void mostrarCajaRegis(){
+		pantallaCaja.main(null);
+	}
+	
+	public void ocultarPantallaCaja(){
+		
+	}
 	
 	
 }

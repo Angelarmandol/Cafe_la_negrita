@@ -98,6 +98,7 @@ public class Inicio {
 				}else {
 				if(rdbtnNewRadioButton.isSelected()) {
 					JOptionPane.showMessageDialog(null, "Inicia jar cajero");
+					control.mostrarCajaRegis();
 				}else {
 					JOptionPane.showMessageDialog(null, "No se selecciono nada");
 				}
