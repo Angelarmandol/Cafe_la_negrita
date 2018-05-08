@@ -1,10 +1,14 @@
 package paquetaxo;
 
+import java.awt.Color;
+import java.awt.Event;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JSplitPane;
 import java.awt.BorderLayout;
+
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JScrollPane;
@@ -14,6 +18,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JEditorPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 public class Cajero {
 
@@ -47,6 +58,13 @@ public class Cajero {
 	 */
 	private void initialize() {
 		frmCajero = new JFrame();
+		frmCajero.setEnabled(true);
+		
+	
+	
+		
+		
+	
 		frmCajero.setTitle("Cajero");
 		frmCajero.setBounds(100, 100, 791, 461);
 		frmCajero.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,26 +83,73 @@ public class Cajero {
 		frmCajero.getContentPane().add(txtpnPruebaDeCaja);
 		
 		JButton subTot = new JButton("SubTotal");
+		subTot.addKeyListener(new KeyAdapter() {
+		 
+			public void keyPressed(KeyEvent arg0) {
+				pulso(arg0.getKeyChar());
+			}
+		});
 		subTot.setBounds(478, 29, 89, 23);
 		frmCajero.getContentPane().add(subTot);
 		
-		JButton tot = new JButton("Total");
+		JButton tot = new JButton("T[o]tal");
+		tot.addKeyListener(new KeyAdapter() {
+		 
+			public void keyPressed(KeyEvent arg0) {
+				pulso(arg0.getKeyChar());
+			}
+		});
 		tot.setBounds(577, 29, 89, 23);
 		frmCajero.getContentPane().add(tot);
 		
-		JButton caff = new JButton("Cafe");
+		JButton caff = new JButton("[C]afe");
+		caff.addKeyListener(new KeyAdapter() {
+		 
+			public void keyPressed(KeyEvent arg0) {
+				pulso(arg0.getKeyChar());
+			}
+		});
+		
+		
+		
+		caff.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		caff.setBounds(10, 75, 89, 23);
 		frmCajero.getContentPane().add(caff);
 		
-		JButton polv = new JButton("Polvos");
+		JButton polv = new JButton("[P]olvos");
+		polv.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		polv.addKeyListener(new KeyAdapter() {
+			 
+			public void keyPressed(KeyEvent arg0) {
+				pulso(arg0.getKeyChar());
+			}
+		});
 		polv.setBounds(109, 75, 89, 23);
 		frmCajero.getContentPane().add(polv);
 		
-		JButton t3 = new JButton("T\u00E9");
+		JButton t3 = new JButton("[T\u00E9]");
+		t3.addKeyListener(new KeyAdapter() {
+		 
+			public void keyPressed(KeyEvent arg0) {
+				pulso(arg0.getKeyChar());
+			}
+		});
 		t3.setBounds(208, 75, 89, 23);
 		frmCajero.getContentPane().add(t3);
 		
-		JButton esen = new JButton("Esencias");
+		JButton esen = new JButton("[E]sencias");
+		esen.addKeyListener(new KeyAdapter() {
+		 
+			public void keyPressed(KeyEvent arg0) {
+				pulso(arg0.getKeyChar());
+			}
+		});
 		esen.setBounds(307, 75, 89, 23);
 		frmCajero.getContentPane().add(esen);
 		
@@ -119,6 +184,12 @@ public class Cajero {
 		frmCajero.getContentPane().add(btn6);
 		
 		JButton btn7 = new JButton("7");
+		btn7.addKeyListener(new KeyAdapter() {
+			 
+			public void keyPressed(KeyEvent arg0) {
+			 
+			}
+		});
 		btn7.setBounds(511, 289, 53, 23);
 		frmCajero.getContentPane().add(btn7);
 		
@@ -135,14 +206,34 @@ public class Cajero {
 		frmCajero.getContentPane().add(btnSum);
 		
 		JButton btnRes = new JButton("-");
+		btnRes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnRes.addKeyListener(new KeyAdapter() {
+			 
+			public void keyPressed(KeyEvent arg0) {
+				pulso(arg0.getKeyChar());
+			}
+		});
 		btnRes.setBounds(700, 258, 65, 23);
 		frmCajero.getContentPane().add(btnRes);
 		
 		JButton btnMul = new JButton("*");
+		btnMul.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+	  
 		btnMul.setBounds(511, 260, 89, 23);
 		frmCajero.getContentPane().add(btnMul);
 		
 		JButton btnDiv = new JButton("/");
+		btnDiv.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		 
 		btnDiv.setBounds(610, 260, 80, 23);
 		frmCajero.getContentPane().add(btnDiv);
 		
@@ -156,12 +247,60 @@ public class Cajero {
 		
 		//Botones de la sesion
 		
-		JButton btnAyuda = new JButton("Ayuda");
+		JButton btnAyuda = new JButton("[A]yuda");
+		btnAyuda.addKeyListener(new KeyAdapter() {
+		
+			public void keyPressed(KeyEvent arg0) {
+				pulso(arg0.getKeyChar());
+			}
+		});
 		btnAyuda.setBounds(10, 11, 89, 23);
 		frmCajero.getContentPane().add(btnAyuda);
 		
-		JButton btnCerrarSecion = new JButton("Cerrar sesi\u00F3n");
+		JButton btnCerrarSecion = new JButton("Cerrar sesi\u00F3n[ESC]");
 		btnCerrarSecion.setBounds(109, 11, 110, 23);
 		frmCajero.getContentPane().add(btnCerrarSecion);
+		
+	 
+	}
+	
+	public void pulso(int tecla){
+		System.out.println(tecla);
+		switch(tecla){
+		
+		case 99: //C
+			System.out.println("Se ha precionado C");
+			
+			
+		case 112: //P
+			System.out.println("Se ha precionado P");
+			
+			
+		case 84: //T
+			System.out.println("Se ha precionado T");
+			
+		case 101: //E
+			System.out.println("Se ha precionado E");
+			
+		case 97: //A
+			System.out.println("Se ha precionado A");
+			
+			
+		case 27: //ESC
+			System.out.println("Se ha precionado ESC");
+		
+		case 115: //S
+			System.out.println("Se ha precionado S");	
+				
+		case 111: //O
+			System.out.println("Se ha precionado O");		
+			
+		}
+		
+	}
+	
+	
+	public void calculadora(){
+		
 	}
 }
