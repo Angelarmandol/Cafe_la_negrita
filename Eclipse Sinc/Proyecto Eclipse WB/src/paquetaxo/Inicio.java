@@ -33,19 +33,23 @@ public class Inicio {
 	 * Launch the application.
 	 */
 	
-
+	static Inicio window = new Inicio();
 	Ventanas control = new Ventanas();
 	public static void main(String[] args) {
 
-		
+		 
 		EventQueue.invokeLater(new Runnable() {
+		
 			public void run() {
+		
 				try {
-					Inicio window = new Inicio();
+					
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				
+				
 			}
 		});
 	}
@@ -95,10 +99,14 @@ public class Inicio {
 			if(rdbtnNewRadioButton_1.isSelected()) {
 				JOptionPane.showMessageDialog(null, "Inicia jar Administrador");
 				control.mostrarPantallaAdmin();
+				JOptionPane.showMessageDialog(null, "Se cierra esta ventana");
+				window.frame.setVisible(false);
 				}else {
 				if(rdbtnNewRadioButton.isSelected()) {
 					JOptionPane.showMessageDialog(null, "Inicia jar cajero");
 					control.mostrarCajaRegis();
+					JOptionPane.showMessageDialog(null, "Se cierra esta ventana");
+					window.frame.setVisible(false);
 				}else {
 					JOptionPane.showMessageDialog(null, "No se selecciono nada");
 				}
@@ -153,6 +161,10 @@ public class Inicio {
 		lblLogo.setIcon(new ImageIcon("C:\\Users\\Inspiron3647\\Documents\\GitHub\\Cafe_la_negrita\\Eclipse Sinc\\Proyecto Eclipse WB\\src\\Imagenes\\logorzics.png"));
 		lblLogo.setBounds(10, 11, 327, 241);
 		frame.getContentPane().add(lblLogo);
+	}
+	
+	public void ocultarVentana(){
+		
 	}
 }
 /**

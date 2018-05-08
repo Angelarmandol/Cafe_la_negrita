@@ -104,7 +104,6 @@ public class Administracion extends JFrame{
 	}
 	public Administracion() {
 
-		
 	}
 
 	/**
