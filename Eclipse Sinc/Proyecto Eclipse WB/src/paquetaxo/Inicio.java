@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.Color;
+import java.sql.SQLException;
 
 public class Inicio {
 
@@ -35,6 +36,7 @@ public class Inicio {
 	
 	static Inicio window = new Inicio();
 	Ventanas control = new Ventanas();
+	Conexion conexion = new Conexion();
 	public static void main(String[] args) {
 
 		 
@@ -61,11 +63,21 @@ public class Inicio {
 		initialize();
 	}
 
+	Object puto;
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		/////////////////////////////////--- conexion bd
+		try {
+			conexion.EstablecerConexion();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
+		///////////////////////////////-- conexion bd
 		
 		
 		frame = new JFrame();
@@ -97,7 +109,23 @@ public class Inicio {
 			public void mouseClicked(MouseEvent arg0) {
 			
 			if(rdbtnNewRadioButton_1.isSelected()) {
-				JOptionPane.showMessageDialog(null, "Inicia jar Administrador");
+				JOptionPane.showMessageDialog(null, "Inicia jar Administrador y consulta");
+				
+				
+				////////////////////////// Sentencia
+				
+				
+				
+				try {
+					puto = conexion.EjecutarSentencia("SELECT * FROM Usuarios WHere Pass = 13579");
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				JOptionPane.showMessageDialog(null, puto.toString());
+				///////////////////////////fin de try catch
+				
 				control.mostrarPantallaAdmin();
 				JOptionPane.showMessageDialog(null, "Se cierra esta ventana");
 				window.frame.setVisible(false);
