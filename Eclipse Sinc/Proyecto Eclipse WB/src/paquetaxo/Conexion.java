@@ -9,8 +9,8 @@ import javax.swing.JOptionPane;
 
 public class Conexion {
 
-	private Connection conexion;
-	private Statement sentencia;
+	public Connection conexion;
+	public Statement sentencia;
 	private final String controlador;
 	private final String nombre_bd;
 	private final String usuarioBD;
