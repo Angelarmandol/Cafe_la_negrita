@@ -18,6 +18,9 @@ import java.awt.BorderLayout;
 import javax.swing.JList;
 import javax.swing.AbstractButton;
 import javax.swing.AbstractListModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JScrollBar;
 
 public class Cajero {
 
@@ -46,13 +49,13 @@ public class Cajero {
 		initialize();
 	}
 	private void initialize() {
+		
+		int total = 0;
+		
 		frmCajero = new JFrame();
 		frmCajero.setEnabled(true);
 		
 		frmCajero.setResizable(false);
-	
-		
-		
 	
 		frmCajero.setTitle("Cajero");
 		frmCajero.setBounds(100, 100, 890, 530);
@@ -66,13 +69,20 @@ public class Cajero {
 		
 		//Cuadro de operacion
 		
-		JTextPane txtpnPruebaDeCaja = new JTextPane();
-		txtpnPruebaDeCaja.setEnabled(false);
-		txtpnPruebaDeCaja.setBounds(577, 87, 254, 172);
-		txtpnPruebaDeCaja.setText("Prueba de caja\r\nproducto prueba $23.90\r\niva %16\r\ntotal: $72.50\r\nRecibe: $100.00\r\ncambio: 27.50");
-		frmCajero.getContentPane().add(txtpnPruebaDeCaja);
+		JTextPane screenCaja = new JTextPane();
+		//screenCaja.setText("a");
+		screenCaja.setEnabled(false);
+		screenCaja.setText("Cafe la Negrita");
+		screenCaja.setBounds(577, 87, 254, 172);
+		frmCajero.getContentPane().add(screenCaja);
 		
 		JButton subTot = new JButton("SubTotal");
+		subTot.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				screenCaja.setText(screenCaja.getText() + "\nSubtotal: $"+total);
+			}
+		});
 		subTot.addKeyListener(new KeyAdapter() {
 		 
 			public void keyPressed(KeyEvent arg0) {
@@ -93,6 +103,12 @@ public class Cajero {
 		frmCajero.getContentPane().add(tot);
 		
 		JButton caff = new JButton("[C]afe");
+		caff.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				//internalFrame1.setVisible(true);
+			}
+		});
 		caff.addKeyListener(new KeyAdapter() {
 		 
 			public void keyPressed(KeyEvent arg0) {
@@ -111,43 +127,25 @@ public class Cajero {
 		caff.setBounds(10, 75, 89, 23);
 		frmCajero.getContentPane().add(caff);
 		
-		JButton polv = new JButton("[P]olvos");
-		polv.addActionListener(new ActionListener() {
+		JButton frapp = new JButton("[F]rappe");
+		frapp.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//internalFrame2.setVisible(true);
+			}
+		});
+		frapp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		polv.addKeyListener(new KeyAdapter() {
+		frapp.addKeyListener(new KeyAdapter() {
 			 
 			public void keyPressed(KeyEvent arg0) {
 				pulso(arg0.getKeyChar());
 			}
 		});
-		polv.setBounds(142, 75, 89, 23);
-		frmCajero.getContentPane().add(polv);
-		
-		JButton t3 = new JButton("[T]\u00E9");
-		t3.addKeyListener(new KeyAdapter() {
-		 
-			public void keyPressed(KeyEvent arg0) {
-				pulso(arg0.getKeyChar());
-			}
-		});
-		t3.setBounds(297, 75, 89, 23);
-		frmCajero.getContentPane().add(t3);
-		
-		JButton esen = new JButton("[E]sencias");
-		esen.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		esen.addKeyListener(new KeyAdapter() {
-		 
-			public void keyPressed(KeyEvent arg0) {
-				pulso(arg0.getKeyChar());
-			}
-		});
-		esen.setBounds(447, 75, 89, 23);
-		frmCajero.getContentPane().add(esen);
+		frapp.setBounds(219, 75, 89, 23);
+		frmCajero.getContentPane().add(frapp);
 		
 		//Botones de la sesion
 		
@@ -165,218 +163,148 @@ public class Cajero {
 		btnCerrarSecion.setBounds(109, 11, 110, 23);
 		frmCajero.getContentPane().add(btnCerrarSecion);
 		
-		JLabel lblDeLaCasa = new JLabel("De la casa");
-		lblDeLaCasa.setBounds(10, 109, 89, 14);
-		frmCajero.getContentPane().add(lblDeLaCasa);
+		JInternalFrame internalFrame1 = new JInternalFrame("Cafes");
+		internalFrame1.setBounds(10, 109, 183, 348);
+		frmCajero.getContentPane().add(internalFrame1);
+		internalFrame1.getContentPane().setLayout(null);
 		
-		JList cafelist1 = new JList();
-		cafelist1.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Mezcla de la casa"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
+		JButton cb1 = new JButton("Expresso");
+		cb1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				screenCaja.setText(screenCaja.getText() + "\nExpreso: $25");
+				//total=total+25;
 			}
 		});
-		cafelist1.setBounds(10, 131, 110, 23);
-		frmCajero.getContentPane().add(cafelist1);
+		cb1.setBounds(10, 11, 89, 23);
+		internalFrame1.getContentPane().add(cb1);
 		
-		JLabel lblNewLabel = new JLabel("Escencias");
-		lblNewLabel.setBounds(10, 165, 68, 14);
-		frmCajero.getContentPane().add(lblNewLabel);
-		
-		JList cafelist2 = new JList();
-		cafelist2.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Crema Irlandesa", "Vainilla", "Canela", "Avellana"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
+		JButton cb2 = new JButton("Americano");
+		cb2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				screenCaja.setText(screenCaja.getText() + "\nAmericano: $30");
+				//total=total+30;
 			}
 		});
-		cafelist2.setBounds(10, 190, 110, 69);
-		frmCajero.getContentPane().add(cafelist2);
+		cb2.setBounds(10, 45, 89, 23);
+		internalFrame1.getContentPane().add(cb2);
 		
-		JLabel lblNewLabel_1 = new JLabel("Regionales");
-		lblNewLabel_1.setBounds(10, 270, 89, 14);
-		frmCajero.getContentPane().add(lblNewLabel_1);
-		
-		JList cafelist3 = new JList();
-		cafelist3.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Veracruz", "Chiapas", "Oaxaca"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
+		JButton cb3 = new JButton("Moka");
+		cb3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				screenCaja.setText(screenCaja.getText() + "\nMoka: $35");
+				//total=total+35;
 			}
 		});
-		cafelist3.setBounds(10, 295, 84, 54);
-		frmCajero.getContentPane().add(cafelist3);
+		cb3.setBounds(10, 79, 89, 23);
+		internalFrame1.getContentPane().add(cb3);
 		
-		JLabel lblNewLabel_2 = new JLabel("Suave");
-		lblNewLabel_2.setBounds(142, 109, 46, 14);
-		frmCajero.getContentPane().add(lblNewLabel_2);
-		
-		JList polvolist1 = new JList();
-		polvolist1.setModel(new AbstractListModel() {
-			String[] values = new String[] {"French Vanilla Suprem", "Tahitian Vainilla", "White Chocolate", "Caffe Latte", "Cookies and cream"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
+		JButton cb4 = new JButton("Latte");
+		cb4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				screenCaja.setText(screenCaja.getText() + "\nLatte: $33");
+				//total=total+33;
 			}
 		});
-		polvolist1.setBounds(142, 131, 130, 87);
-		frmCajero.getContentPane().add(polvolist1);
+		cb4.setBounds(10, 113, 89, 23);
+		internalFrame1.getContentPane().add(cb4);
 		
-		JLabel lblDulce = new JLabel("Dulce");
-		lblDulce.setBounds(142, 229, 46, 14);
-		frmCajero.getContentPane().add(lblDulce);
-		
-		JList polvolist2 = new JList();
-		polvolist2.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Irish Cream", "White Chocolate Caramel", "Hazelnut"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
+		JButton cb5 = new JButton("Chai spiced");
+		cb5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				screenCaja.setText(screenCaja.getText() + "\nChai Spiced: $57");
+				//total=total+57;
 			}
 		});
-		polvolist2.setBounds(142, 254, 145, 54);
-		frmCajero.getContentPane().add(polvolist2);
+		cb5.setBounds(10, 147, 89, 23);
+		internalFrame1.getContentPane().add(cb5);
 		
-		JLabel lblIntenso = new JLabel("Intenso");
-		lblIntenso.setBounds(142, 314, 57, 14);
-		frmCajero.getContentPane().add(lblIntenso);
-		
-		JList polvolist3 = new JList();
-		polvolist3.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Mexican Spiced Mix", "Mocha", "Vanilla Chai", "Precious Divinity"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
+		JButton cb6 = new JButton("Chai vainilla");
+		cb6.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				screenCaja.setText(screenCaja.getText() + "\nChai Vainilla: $63");
+				//total=total+63;
 			}
 		});
-		polvolist3.setBounds(142, 342, 130, 69);
-		frmCajero.getContentPane().add(polvolist3);
+		cb6.setBounds(10, 181, 89, 23);
+		internalFrame1.getContentPane().add(cb6);
 		
-		JLabel lblSuave = new JLabel("Suave");
-		lblSuave.setBounds(297, 109, 46, 14);
-		frmCajero.getContentPane().add(lblSuave);
+		JInternalFrame internalFrame2 = new JInternalFrame("Frappes");
+		internalFrame2.setBounds(219, 109, 183, 348);
+		frmCajero.getContentPane().add(internalFrame2);
+		internalFrame2.getContentPane().setLayout(null);
 		
-		JList telist1 = new JList();
-		telist1.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Manzana de rooibos", "Apple jubilee herb tea", "Enchanted moments", "Spicy orange delight", "Lively Lemon"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
-		telist1.setBounds(297, 131, 130, 87);
-		frmCajero.getContentPane().add(telist1);
-		
-		JLabel lblIntenso_1 = new JLabel("Intenso");
-		lblIntenso_1.setBounds(297, 229, 57, 14);
-		frmCajero.getContentPane().add(lblIntenso_1);
-		
-		JList telist2 = new JList();
-		telist2.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Te negro", "Te verde"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
+		JButton fb1 = new JButton("Latte");
+		fb1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				screenCaja.setText(screenCaja.getText() + "\nFrappe Latte: $55");
+				//total=total+55;
 			}
 		});
-		telist2.setBounds(297, 258, 68, 40);
-		frmCajero.getContentPane().add(telist2);
+		fb1.setBounds(10, 11, 89, 23);
+		internalFrame2.getContentPane().add(fb1);
 		
-		JLabel lblAfrutados = new JLabel("Afrutados");
-		lblAfrutados.setBounds(447, 109, 68, 14);
-		frmCajero.getContentPane().add(lblAfrutados);
-		
-		JList esenlist1 = new JList();
-		esenlist1.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Manzana", "Platano", "Kiwi", "Frambuesa", "Fresa", "Fruta de la pasion", "Mango"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
+		JButton fb2 = new JButton("Moka");
+		fb2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				screenCaja.setText(screenCaja.getText() + "\nFrappe Moka: $60");
+				//total=total+60;
 			}
 		});
-		esenlist1.setBounds(447, 131, 116, 128);
-		frmCajero.getContentPane().add(esenlist1);
+		fb2.setBounds(10, 45, 89, 23);
+		internalFrame2.getContentPane().add(fb2);
 		
-		JLabel lblNewLabel_3 = new JLabel("Plantas y Frutos");
-		lblNewLabel_3.setBounds(447, 270, 99, 14);
-		frmCajero.getContentPane().add(lblNewLabel_3);
-		
-		JList esenlist2 = new JList();
-		esenlist2.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Almendra", "Avellana", "Cafe", "Vainilla", "Menta"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
+		JButton fb3 = new JButton("Vainilla");
+		fb3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				screenCaja.setText(screenCaja.getText() + "\nFrappe Vainilla: $72");
+				//total=total+72;
 			}
 		});
-		esenlist2.setBounds(447, 288, 74, 87);
-		frmCajero.getContentPane().add(esenlist2);
+		fb3.setBounds(10, 79, 89, 23);
+		internalFrame2.getContentPane().add(fb3);
 		
-		JLabel lblEspeciales = new JLabel("Especiales");
-		lblEspeciales.setBounds(447, 384, 74, 14);
-		frmCajero.getContentPane().add(lblEspeciales);
-		
-		JList list = new JList();
-		list.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Crema irlandesa", "Caramelo"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
+		JButton fb4 = new JButton("Caramelo");
+		fb4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				screenCaja.setText(screenCaja.getText() + "\nFrappe Caramelo: $85");
+				//total=total+85;
 			}
 		});
-		list.setBounds(447, 409, 99, 46);
-		frmCajero.getContentPane().add(list);
+		fb4.setBounds(10, 113, 89, 23);
+		internalFrame2.getContentPane().add(fb4);
+		
+		//internalFrame2.setVisible(false);
+		//internalFrame1.setVisible(false);
+		internalFrame1.setVisible(true);
+		internalFrame2.setVisible(true);
 		
 		
 	
 	}
 	
 	public void pulso(int tecla){
+		
 		System.out.println(tecla);
 		switch(tecla){
 		
 		case 99: //C
 			System.out.println("Se ha precionado C");
-			
+			//internalFrame1.setVisible(true);
 			//textPane.setText(textPane.getText()+"Puto \n");
 			break;
-		case 112: //P
-			System.out.println("Se ha precionado P");
-			break;
-			
-		case 84: //T
-			System.out.println("Se ha precionado T");
-			break;
-		case 101: //E
-			System.out.println("Se ha precionado E");
-			break;
-		case 97: //A
-			System.out.println("Se ha precionado A");
+		case 112: //F
+			System.out.println("Se ha precionado F");
+			//internalFrame2.setVisible(true);
 			break;
 			
 		case 27: //ESC
