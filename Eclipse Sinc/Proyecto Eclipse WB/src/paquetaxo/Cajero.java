@@ -26,6 +26,7 @@ import javax.swing.JFormattedTextField;
 
 public class Cajero {
 
+	int thot=0;
 	private JFrame frmCajero;
 
 	/**
@@ -51,8 +52,8 @@ public class Cajero {
 		initialize();
 	}
 	private void initialize() {
-		
-		int total = 0, thot=0;
+		JFormattedTextField formattedTextField = new JFormattedTextField();
+		int total = 0;
 		
 		frmCajero = new JFrame();
 		frmCajero.setEnabled(true);
@@ -98,7 +99,7 @@ public class Cajero {
 		tot.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				int valor = formattedTextField.getValue();
+				int valor = Integer.parseInt(formattedTextField.getText());
 				screenCaja.setText(screenCaja.getText() + "\nEfectivo: $"+valor);
 				thot=valor-total;
 				screenCaja.setText(screenCaja.getText() + "\nCambio: $"+thot);
@@ -306,7 +307,7 @@ public class Cajero {
 		lblEfectivo.setBounds(604, 298, 62, 14);
 		frmCajero.getContentPane().add(lblEfectivo);
 		
-		JFormattedTextField formattedTextField = new JFormattedTextField();
+		
 		formattedTextField.setBounds(659, 295, 84, 20);
 		frmCajero.getContentPane().add(formattedTextField);
 		
