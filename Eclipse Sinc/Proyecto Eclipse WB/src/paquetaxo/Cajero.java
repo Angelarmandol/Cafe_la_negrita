@@ -21,6 +21,8 @@ import javax.swing.AbstractListModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JScrollBar;
+import javax.swing.JTextField;
+import javax.swing.JFormattedTextField;
 
 public class Cajero {
 
@@ -50,7 +52,7 @@ public class Cajero {
 	}
 	private void initialize() {
 		
-		int total = 0;
+		int total = 0, thot=0;
 		
 		frmCajero = new JFrame();
 		frmCajero.setEnabled(true);
@@ -93,6 +95,15 @@ public class Cajero {
 		frmCajero.getContentPane().add(subTot);
 		
 		JButton tot = new JButton("T[o]tal");
+		tot.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				int valor = formattedTextField.getValue();
+				screenCaja.setText(screenCaja.getText() + "\nEfectivo: $"+valor);
+				thot=valor-total;
+				screenCaja.setText(screenCaja.getText() + "\nCambio: $"+thot);
+			}
+		});
 		tot.addKeyListener(new KeyAdapter() {
 		 
 			public void keyPressed(KeyEvent arg0) {
@@ -163,10 +174,14 @@ public class Cajero {
 		btnCerrarSecion.setBounds(109, 11, 110, 23);
 		frmCajero.getContentPane().add(btnCerrarSecion);
 		
+		//Frame de ventana cafe
+		
 		JInternalFrame internalFrame1 = new JInternalFrame("Cafes");
 		internalFrame1.setBounds(10, 109, 183, 348);
 		frmCajero.getContentPane().add(internalFrame1);
 		internalFrame1.getContentPane().setLayout(null);
+		
+		//Opciones cafe
 		
 		JButton cb1 = new JButton("Expresso");
 		cb1.addMouseListener(new MouseAdapter() {
@@ -234,10 +249,14 @@ public class Cajero {
 		cb6.setBounds(10, 181, 89, 23);
 		internalFrame1.getContentPane().add(cb6);
 		
+		//Frame ventana Frappe
+		
 		JInternalFrame internalFrame2 = new JInternalFrame("Frappes");
 		internalFrame2.setBounds(219, 109, 183, 348);
 		frmCajero.getContentPane().add(internalFrame2);
 		internalFrame2.getContentPane().setLayout(null);
+		
+		//Opciones de Frappe
 		
 		JButton fb1 = new JButton("Latte");
 		fb1.addMouseListener(new MouseAdapter() {
@@ -283,6 +302,16 @@ public class Cajero {
 		fb4.setBounds(10, 113, 89, 23);
 		internalFrame2.getContentPane().add(fb4);
 		
+		JLabel lblEfectivo = new JLabel("Efectivo:");
+		lblEfectivo.setBounds(604, 298, 62, 14);
+		frmCajero.getContentPane().add(lblEfectivo);
+		
+		JFormattedTextField formattedTextField = new JFormattedTextField();
+		formattedTextField.setBounds(659, 295, 84, 20);
+		frmCajero.getContentPane().add(formattedTextField);
+		
+		//Visibilidad de los frames 
+		
 		//internalFrame2.setVisible(false);
 		//internalFrame1.setVisible(false);
 		internalFrame1.setVisible(true);
@@ -300,7 +329,6 @@ public class Cajero {
 		case 99: //C
 			System.out.println("Se ha precionado C");
 			//internalFrame1.setVisible(true);
-			//textPane.setText(textPane.getText()+"Puto \n");
 			break;
 		case 112: //F
 			System.out.println("Se ha precionado F");
