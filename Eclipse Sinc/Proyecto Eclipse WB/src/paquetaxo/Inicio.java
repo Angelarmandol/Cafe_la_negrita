@@ -16,6 +16,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -57,7 +59,7 @@ public class Inicio {
 	}
 
 	/**
-	 * Create the application.
+	 * @wbp.parser.entryPoint
 	 */
 	public Inicio() {
 		initialize();
@@ -68,14 +70,8 @@ public class Inicio {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
-		/////////////////////////////////--- conexion bd
-		try {
-			conexion.EstablecerConexion();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+	private void initialize()  {
+		conexion.getConnection();
 		
 		///////////////////////////////-- conexion bd
 		
@@ -109,42 +105,74 @@ public class Inicio {
 			public void mouseClicked(MouseEvent arg0) {
 			
 			if(rdbtnNewRadioButton_1.isSelected()) {
-				JOptionPane.showMessageDialog(null, "Inicia jar Administrador y consulta");
 				
 				
-				////////////////////////// Sentencia
-				
-				
+			// login
 				
 				try {
-					puto = conexion.EjecutarSentencia("SELECT * FROM Usuarios WHere Pass = 13579");
-				} catch (SQLException e) {
+					conexion.login(txtUsuario.getText(), txtContrasea.getText(), 1);
+				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+					e1.printStackTrace();
+				}			
 				
-				JOptionPane.showMessageDialog(null, puto.toString());
-				///////////////////////////fin de try catch
+				 
 				
+				
+		 if(conexion.login) {
+
+				JOptionPane.showMessageDialog(null, "Inicia jar Administrador y consulta");
 				control.mostrarPantallaAdmin();
 				JOptionPane.showMessageDialog(null, "Se cierra esta ventana");
 				window.frame.setVisible(false);
-				}else {
-				if(rdbtnNewRadioButton.isSelected()) {
-					JOptionPane.showMessageDialog(null, "Inicia jar cajero");
-					control.mostrarCajaRegis();
-					JOptionPane.showMessageDialog(null, "Se cierra esta ventana");
-					window.frame.setVisible(false);
-				}else {
-					JOptionPane.showMessageDialog(null, "No se selecciono nada");
-				}
+				
+			 
+			
+		 }
+			
+			else {
+				JOptionPane.showMessageDialog(null, "Usuario pass incorrecto");
 			}
 			
-			
+		 
+				
 			
 			
 			
 			}
+			
+			if(rdbtnNewRadioButton.isSelected()) {
+				
+				
+				try {
+					conexion.login(txtUsuario.getText(), txtContrasea.getText(), 2);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}			
+				
+				
+				 if(conexion.login) {
+				
+				JOptionPane.showMessageDialog(null, "Inicia jar cajero");
+				control.mostrarCajaRegis();
+				JOptionPane.showMessageDialog(null, "Se cierra esta ventana");
+				
+				 }else {
+						JOptionPane.showMessageDialog(null, "Usuario pass cajero incorrecto");
+				 }
+				 
+				
+				
+				window.frame.setVisible(false);
+			}else {
+				if(rdbtnNewRadioButton_1.isSelected()) {}else {
+				JOptionPane.showMessageDialog(null, "No se selecciono nada");
+			}
+			}
+		 
+			
+			}// fin de moue cliked
 		});
 		btnIniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
