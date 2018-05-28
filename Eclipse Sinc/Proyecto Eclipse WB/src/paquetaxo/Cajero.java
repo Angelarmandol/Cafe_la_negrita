@@ -27,6 +27,7 @@ import javax.swing.JFormattedTextField;
 public class Cajero {
 
 	int thot=0;
+	int total = 0;
 	private JFrame frmCajero;
 
 	/**
@@ -53,7 +54,7 @@ public class Cajero {
 	}
 	private void initialize() {
 		JFormattedTextField formattedTextField = new JFormattedTextField();
-		int total = 0;
+		
 		
 		frmCajero = new JFrame();
 		frmCajero.setEnabled(true);
@@ -76,7 +77,7 @@ public class Cajero {
 		//screenCaja.setText("a");
 		screenCaja.setEnabled(false);
 		screenCaja.setText("Cafe la Negrita");
-		screenCaja.setBounds(577, 87, 254, 172);
+		screenCaja.setBounds(577, 87, 254, 276);
 		frmCajero.getContentPane().add(screenCaja);
 		
 		JButton subTot = new JButton("SubTotal");
@@ -114,51 +115,6 @@ public class Cajero {
 		tot.setBounds(676, 29, 89, 23);
 		frmCajero.getContentPane().add(tot);
 		
-		JButton caff = new JButton("[C]afe");
-		caff.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				//internalFrame1.setVisible(true);
-			}
-		});
-		caff.addKeyListener(new KeyAdapter() {
-		 
-			public void keyPressed(KeyEvent arg0) {
-				pulso(arg0.getKeyChar());
-			}
-		});
-		
-		
-		
-		caff.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				//textPane.setText(textPane.getText()+"Puto \n");
-				
-			}
-		});
-		caff.setBounds(10, 75, 89, 23);
-		frmCajero.getContentPane().add(caff);
-		
-		JButton frapp = new JButton("[F]rappe");
-		frapp.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				//internalFrame2.setVisible(true);
-			}
-		});
-		frapp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		frapp.addKeyListener(new KeyAdapter() {
-			 
-			public void keyPressed(KeyEvent arg0) {
-				pulso(arg0.getKeyChar());
-			}
-		});
-		frapp.setBounds(219, 75, 89, 23);
-		frmCajero.getContentPane().add(frapp);
-		
 		//Botones de la sesion
 		
 		JButton btnAyuda = new JButton("[A]yuda");
@@ -172,7 +128,7 @@ public class Cajero {
 		frmCajero.getContentPane().add(btnAyuda);
 		
 		JButton btnCerrarSecion = new JButton("Cerrar sesi\u00F3n[ESC]");
-		btnCerrarSecion.setBounds(109, 11, 110, 23);
+		btnCerrarSecion.setBounds(109, 11, 158, 23);
 		frmCajero.getContentPane().add(btnCerrarSecion);
 		
 		//Frame de ventana cafe
@@ -189,7 +145,7 @@ public class Cajero {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				screenCaja.setText(screenCaja.getText() + "\nExpreso: $25");
-				//total=total+25;
+				total=total+25;
 			}
 		});
 		cb1.setBounds(10, 11, 89, 23);
@@ -200,10 +156,10 @@ public class Cajero {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				screenCaja.setText(screenCaja.getText() + "\nAmericano: $30");
-				//total=total+30;
+				total=total+30;
 			}
 		});
-		cb2.setBounds(10, 45, 89, 23);
+		cb2.setBounds(10, 45, 108, 23);
 		internalFrame1.getContentPane().add(cb2);
 		
 		JButton cb3 = new JButton("Moka");
@@ -211,7 +167,7 @@ public class Cajero {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				screenCaja.setText(screenCaja.getText() + "\nMoka: $35");
-				//total=total+35;
+				total=total+35;
 			}
 		});
 		cb3.setBounds(10, 79, 89, 23);
@@ -222,7 +178,7 @@ public class Cajero {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				screenCaja.setText(screenCaja.getText() + "\nLatte: $33");
-				//total=total+33;
+				total=total+33;
 			}
 		});
 		cb4.setBounds(10, 113, 89, 23);
@@ -233,10 +189,10 @@ public class Cajero {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				screenCaja.setText(screenCaja.getText() + "\nChai Spiced: $57");
-				//total=total+57;
+				total=total+57;
 			}
 		});
-		cb5.setBounds(10, 147, 89, 23);
+		cb5.setBounds(10, 147, 108, 23);
 		internalFrame1.getContentPane().add(cb5);
 		
 		JButton cb6 = new JButton("Chai vainilla");
@@ -244,10 +200,10 @@ public class Cajero {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				screenCaja.setText(screenCaja.getText() + "\nChai Vainilla: $63");
-				//total=total+63;
+				total=total+63;
 			}
 		});
-		cb6.setBounds(10, 181, 89, 23);
+		cb6.setBounds(10, 181, 108, 23);
 		internalFrame1.getContentPane().add(cb6);
 		
 		//Frame ventana Frappe
@@ -264,7 +220,7 @@ public class Cajero {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				screenCaja.setText(screenCaja.getText() + "\nFrappe Latte: $55");
-				//total=total+55;
+				total=total+55;
 			}
 		});
 		fb1.setBounds(10, 11, 89, 23);
@@ -275,7 +231,7 @@ public class Cajero {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				screenCaja.setText(screenCaja.getText() + "\nFrappe Moka: $60");
-				//total=total+60;
+				total=total+60;
 			}
 		});
 		fb2.setBounds(10, 45, 89, 23);
@@ -286,7 +242,7 @@ public class Cajero {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				screenCaja.setText(screenCaja.getText() + "\nFrappe Vainilla: $72");
-				//total=total+72;
+				total=total+72;
 			}
 		});
 		fb3.setBounds(10, 79, 89, 23);
@@ -297,24 +253,32 @@ public class Cajero {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				screenCaja.setText(screenCaja.getText() + "\nFrappe Caramelo: $85");
-				//total=total+85;
+				total=total+85;
 			}
 		});
 		fb4.setBounds(10, 113, 89, 23);
 		internalFrame2.getContentPane().add(fb4);
 		
 		JLabel lblEfectivo = new JLabel("Efectivo:");
-		lblEfectivo.setBounds(604, 298, 62, 14);
+		lblEfectivo.setBounds(577, 404, 62, 14);
 		frmCajero.getContentPane().add(lblEfectivo);
 		
 		
-		formattedTextField.setBounds(659, 295, 84, 20);
+		formattedTextField.setBounds(626, 401, 84, 20);
 		frmCajero.getContentPane().add(formattedTextField);
 		
-		//Visibilidad de los frames 
+		JButton btrec = new JButton("Imprimir Recibo");
+		btrec.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				System.out.println(screenCaja.getText());
+				screenCaja.setText("Cafe la Negrita");
+			}
+		});
+		btrec.setBounds(738, 400, 136, 23);
+		frmCajero.getContentPane().add(btrec);
 		
-		//internalFrame2.setVisible(false);
-		//internalFrame1.setVisible(false);
+		//Visibilidad de los frames 
 		internalFrame1.setVisible(true);
 		internalFrame2.setVisible(true);
 		
@@ -329,11 +293,9 @@ public class Cajero {
 		
 		case 99: //C
 			System.out.println("Se ha precionado C");
-			//internalFrame1.setVisible(true);
 			break;
 		case 112: //F
 			System.out.println("Se ha precionado F");
-			//internalFrame2.setVisible(true);
 			break;
 			
 		case 27: //ESC
