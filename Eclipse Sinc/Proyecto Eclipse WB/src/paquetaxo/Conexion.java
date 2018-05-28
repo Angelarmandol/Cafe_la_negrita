@@ -11,20 +11,18 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
 
 public class Conexion {
 
-	 
-boolean login = false;
+
+
 	public static Connection getConnection() {
 
-		String user = "root";
-		String password = "";
-		String ruta = "jdbc:mysql://localhost:3306/mydb";
+		String user = "Angel";
+		String password = "muu295t";
+		String ruta = "jdbc:mysql://localhost/proyecto";
 	 
 		try {
 			Class.forName("com.mysql.jdbc.Driver"); // se carga el driver
@@ -121,74 +119,28 @@ boolean login = false;
 		}
 	}
 
-	public void consultas(String consulta) throws SQLException  {
-		Statement st = this.getConnection().createStatement();
-		ResultSet rs = st.executeQuery(consulta);
-		while (rs.next())
-		{
-		   System.out.println("nombre="+rs.getObject("Usuario"));
-		}
-		rs.close();
-		
-		
-	}
-	
-	public void login(String nom, String pass, int tipo) throws SQLException {
-		
-		Statement st = this.getConnection().createStatement();
-		ResultSet rs = st.executeQuery("SELECT * FROM usuarios");
-		
-		if(tipo==1) {
-			System.out.println("es tipo 1");
-		
-		while (rs.next())
-		{
-			
-			
-			if(rs.getObject("Usuario").equals(nom)) {
-			
-		  if(rs.getObject("Pass").equals(pass)) {
-			  System.out.println("Si es");
-			login = true;
-		  }else {
-			  if(!login)
-			  login = false;
-			  System.out.println("No es");
-		  }
-		  
-		  
+	public void consultas() throws IOException {
+		String aux;
+		Connection con = Conexion.getConnection();
+		try {
+			Statement st = con.createStatement();
+			System.out.println("digite la matricula del alumno a consultar");
+			aux = tcl.readLine();
+			matricula = Integer.parseInt(aux);
+			ResultSet tabla = st
+					.executeQuery("select * from alumnos where matricula="
+							+ matricula);
+			if (tabla.next()) {
+				System.out.println(" matricula: " + tabla.getInt("matricula")
+						+ "\n");
+				System.out.println("nombre: " + tabla.getString("nombre"));
+				System.out.println("grupo: " + tabla.getFloat("grupo") + "\n");
+
 			}
-		  
+		} catch (SQLException e) {
+			System.out.println("Error al consultar");
+		 
 		}
-		 
-		}else {
-			 
-			while (rs.next())
-			{
-				
-				if(rs.getObject("Usuario").equals(nom)) {
-				
-			  if(rs.getObject("Pass").equals(pass)) {
-				  login = true;
-			  }else {
-				  if(!login){
-				  login = false;
-				  }
-			  }
-			  
-				}else {
-					
-				}
-			  
-			  
-			}
-			
-			
-		}
-		 
-		 
-	 
-		
 	}
 
  
@@ -219,7 +171,5 @@ boolean login = false;
 	public static void generarArrays() throws SQLException {
 
 	}
-
- 
 
 }
