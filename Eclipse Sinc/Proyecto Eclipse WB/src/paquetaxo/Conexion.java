@@ -11,18 +11,23 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
-
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class Conexion {
 
 
-
+	Statement st;
+	ResultSet rs;
+boolean login = false;
 	public static Connection getConnection() {
 
-		String user = "Angel";
-		String password = "muu295t";
-		String ruta = "jdbc:mysql://localhost/proyecto";
+		String user = "root";
+		String password = "";
+		String ruta = "jdbc:mysql://localhost:3306/negrita";
 	 
 		try {
 			Class.forName("com.mysql.jdbc.Driver"); // se carga el driver
@@ -119,51 +124,128 @@ public class Conexion {
 		}
 	}
 
-	public void consultas() throws IOException {
-		String aux;
-		Connection con = Conexion.getConnection();
-		try {
-			Statement st = con.createStatement();
-			System.out.println("digite la matricula del alumno a consultar");
-			aux = tcl.readLine();
-			matricula = Integer.parseInt(aux);
-			ResultSet tabla = st
-					.executeQuery("select * from alumnos where matricula="
-							+ matricula);
-			if (tabla.next()) {
-				System.out.println(" matricula: " + tabla.getInt("matricula")
-						+ "\n");
-				System.out.println("nombre: " + tabla.getString("nombre"));
-				System.out.println("grupo: " + tabla.getFloat("grupo") + "\n");
-
-			}
-		} catch (SQLException e) {
-			System.out.println("Error al consultar");
-		 
+	public void consultas(String consulta) throws SQLException  {
+		Statement st = this.getConnection().createStatement();
+		ResultSet rs = st.executeQuery(consulta);
+		while (rs.next())
+		{
+		   System.out.println("nombre="+rs.getObject("Usuario"));
 		}
+		rs.close();
+		
+		
+	}
+	
+	public void login(String nom, String pass, int tipo) throws SQLException {
+		
+		Statement st = this.getConnection().createStatement();
+		ResultSet rs = st.executeQuery("SELECT * FROM usuarios");
+		
+		if(tipo==1) {
+			System.out.println("es tipo 1");
+		
+		while (rs.next())
+		{
+			
+			
+			if(rs.getObject("Usuario").equals(nom)) {
+			
+		  if(rs.getObject("Pass").equals(pass)) {
+			  System.out.println("Si es");
+			login = true;
+		  }else {
+			  if(!login)
+			  login = false;
+			  System.out.println("No es");
+		  }
+		  
+		  
+			}
+		  
+		}
+		 
+		}else {
+			 
+			while (rs.next())
+			{
+				
+				if(rs.getObject("Usuario").equals(nom)) {
+				
+			  if(rs.getObject("Pass").equals(pass)) {
+				  login = true;
+			  }else {
+				  if(!login){
+				  login = false;
+				  }
+			  }
+			  
+				}else {
+					
+				}
+			  
+			  
+			}
+			
+			
+		}
+		 
+		 
+	 
+		
 	}
 
  
-	public void acceso(String codigoDeBarras) {
+	public void consultaDeUsuarios() throws SQLException {
 
-		String aux;
-		Connection con = Conexion.getConnection();
+
+
+
+		System.out.println("Se muestra tabla");
+		
+		
+		
+		
+		Administracion.model.addColumn("ingredientes");
+		Administracion.model.addColumn("cantidad");
+		
 		try {
-			Statement st = con.createStatement();
-			System.out.println("si");
-			System.out.println(codigoDeBarras);
-
-			ResultSet tabla = st
-					.executeQuery("select * from admins where alumno_no_control =("
-							+ codigoDeBarras + ")");
-		 
-
-		} catch (SQLException s) {
-			System.out.println("Error al acceder");
-			 
-
+			st = this.getConnection().createStatement();
+			rs = st.executeQuery("SELECT * FROM usuarios");
+	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		try {
+			System.out.println("Entra while");
+			while (rs.next())
+			{
+				System.out.println("primer while");
+			   // Se crea un array que será una de las filas de la tabla.
+			   Object [] fila = new Object[2]; // Hay tres columnas en la tabla
 
+			   // Se rellena cada posición del array con una de las columnas de la tabla en base de datos.
+			   for (int i=0;i<2;i++) {
+			      fila[i] = rs.getObject(i+1); // El primer indice en rs es el 1, no el cero, por eso se suma 1.
+			   System.out.println("se insertara: "+fila[i]);
+			   }
+			   // Se añade al modelo la fila completa.
+			   Administracion.model.addRow(fila);
+			    
+			   
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+		
+		
+	
+	
+		
+	
 	}
 
 	static ResultSet registro = null;
@@ -171,5 +253,53 @@ public class Conexion {
 	public static void generarArrays() throws SQLException {
 
 	}
+
+	public void rellenarInventario() {
+
+
+		System.out.println("Se muestra tabla");
+		
+	
+		Administracion.model.addColumn("ingredientes");
+		Administracion.model.addColumn("cantidad");
+		
+		try {
+			st = this.getConnection().createStatement();
+			rs = st.executeQuery("SELECT * FROM inventario");
+	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			System.out.println("Entra while");
+			while (rs.next())
+			{
+				System.out.println("primer while");
+			   // Se crea un array que será una de las filas de la tabla.
+			   Object [] fila = new Object[2]; // Hay tres columnas en la tabla
+
+			   // Se rellena cada posición del array con una de las columnas de la tabla en base de datos.
+			   for (int i=0;i<2;i++) {
+			      fila[i] = rs.getObject(i+1); // El primer indice en rs es el 1, no el cero, por eso se suma 1.
+			   System.out.println("se insertara: "+fila[i]);
+			   }
+			   // Se añade al modelo la fila completa.
+			   Administracion.model.addRow(fila);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+		
+		
+	
+	
+		
+	}
+
+ 
 
 }

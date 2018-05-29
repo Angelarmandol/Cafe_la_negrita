@@ -51,13 +51,13 @@ public class Ventanas {
 	
 	
 	public void mostrarPantallaAdmin(){
-		pantallaAdmin.iniciar();
+		pantallaAdmin.initialize();
 	}// fin de metodo de mostrar pantalla
 	
 
 	public void ocultarPantallaAdmin(){
 		
-		pantallaAdmin.setVisible(false);
+		//pantallaAdmin.setVisible(false);
 	 
 	}// fin de metodo de mostrar pantalla
 	
