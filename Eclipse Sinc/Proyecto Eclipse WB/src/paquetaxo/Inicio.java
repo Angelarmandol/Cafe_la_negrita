@@ -24,6 +24,8 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.sql.SQLException;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Inicio {
 
@@ -200,12 +202,33 @@ public class Inicio {
 		frame.getContentPane().add(btnCancelar);
 		
 		txtUsuario = new JTextField();
+		txtUsuario.addKeyListener(new KeyAdapter() {
+		 
+			public void keyTyped(KeyEvent tecla) {
+				System.out.println(	tecla.getExtendedKeyCode());
+			}
+		});
+	 
+		txtUsuario.addMouseListener(new MouseAdapter() {
+			
+			public void mouseClicked(MouseEvent arg0) {
+				txtUsuario.setText("");
+			}
+		});
 		txtUsuario.setText("Usuario");
+		txtUsuario.setToolTipText("Contrase\u00F1a");
 		txtUsuario.setBounds(60, 324, 228, 20);
 		frame.getContentPane().add(txtUsuario);
 		txtUsuario.setColumns(10);
 		
 		txtContrasea = new JTextField();
+	 
+		txtContrasea.addMouseListener(new MouseAdapter() {
+		
+			public void mouseClicked(MouseEvent arg0) {
+				txtContrasea.setText("");
+			}
+		});
 		txtContrasea.setText("Contrase\u00F1a");
 		txtContrasea.setToolTipText("Contrase\u00F1a");
 		txtContrasea.setBounds(60, 355, 219, 20);

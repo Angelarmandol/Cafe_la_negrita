@@ -51,6 +51,10 @@ public class Administracion extends JFrame {
 	 */
 
 	public static void main(String[] args) {
+		
+		model.addColumn("ingredientes");
+		model.addColumn("cantidad");
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -136,6 +140,7 @@ public class Administracion extends JFrame {
 		mntmAbirConsulta.addMouseListener(new MouseAdapter() {
 			 
 		public void mousePressed(MouseEvent ar0){
+			model.setRowCount(0);
 			conexion.rellenarInventario();
 			frmAdministracion.getContentPane().setEnabled(false);
 		}
@@ -152,7 +157,7 @@ public class Administracion extends JFrame {
 
 				
 				try {
-				 
+					model.setRowCount(0);
 					conexion.consultaDeUsuarios();
 					frmAdministracion.getContentPane().setEnabled(false);
 				} catch (SQLException e) {

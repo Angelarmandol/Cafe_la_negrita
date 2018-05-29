@@ -165,8 +165,7 @@ public class Conexion {
 
 		System.out.println("Se muestra tabla");
 
-		Administracion.model.addColumn("ingredientes");
-		Administracion.model.addColumn("cantidad");
+	 
 
 		try {
 			st = this.getConnection().createStatement();
@@ -212,8 +211,7 @@ public class Conexion {
 
 		System.out.println("Se muestra tabla");
 
-		Administracion.model.addColumn("ingredientes");
-		Administracion.model.addColumn("cantidad");
+	
 
 		try {
 			st = this.getConnection().createStatement();

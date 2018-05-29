@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.JScrollPane;
@@ -100,14 +101,61 @@ public class Cajero {
 		frmCajero.getContentPane().add(subTot);
 
 		JButton tot = new JButton("T[o]tal");
+		tot.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		tot.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent arg0) {
+				
+				try{
+				if(Integer.parseInt(formattedTextField.getText())>0){
 				int valor = Integer.parseInt(formattedTextField.getText());
+				
+				
 				screenCaja.setText(screenCaja.getText() + "\nEfectivo: $"
 						+ valor);
 				thot = valor - total;
 				screenCaja.setText(screenCaja.getText() + "\nCambio: $" + thot);
+				
+				}
+				}
+				catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "No se a insertado dinero");
+				}
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				/*
+				 * 
+				 * se necesita validar siu el dinero ingresado es matyor  a la catidad
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 * Cuando se confiemrn l exixstencia 
+				 * de los productos se resta en base d a la cantidad e ingredientes que se necesinar
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 */
+				
+				
+				
+				
+				
 			}
 		});
 		tot.addKeyListener(new KeyAdapter() {
@@ -313,7 +361,7 @@ public class Cajero {
 		lblEfectivo.setBounds(604, 298, 62, 14);
 		frmCajero.getContentPane().add(lblEfectivo);
 
-		formattedTextField.setBounds(659, 295, 84, 20);
+		formattedTextField.setBounds(653, 295, 84, 20);
 		frmCajero.getContentPane().add(formattedTextField);
 
 		// Visibilidad de los frames
