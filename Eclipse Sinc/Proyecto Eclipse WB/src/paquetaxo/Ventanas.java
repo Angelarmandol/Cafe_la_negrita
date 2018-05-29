@@ -51,7 +51,7 @@ public class Ventanas {
 	
 	
 	public void mostrarPantallaAdmin(){
-		pantallaAdmin.initialize();
+		pantallaAdmin.main(null);
 	}// fin de metodo de mostrar pantalla
 	
 

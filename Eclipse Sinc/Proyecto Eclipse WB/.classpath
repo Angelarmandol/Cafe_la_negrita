@@ -2,5 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/Inspiron3647/Documents/GitHub/Cafe_la_negrita/Eclipse Sinc/Proyecto Eclipse WB/src/paquetaxo/mysql-connector-java-5.1.46.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Inspiron3647/Documents/GitHub/Cafe_la_negrita/Eclipse Sinc/Proyecto Eclipse WB/src/paquetaxo/mysql-connector-java-5.1.46-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

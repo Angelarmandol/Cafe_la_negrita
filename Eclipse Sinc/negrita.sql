@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-05-2018 a las 07:42:32
+-- Tiempo de generación: 29-05-2018 a las 20:21:55
 -- Versión del servidor: 10.1.32-MariaDB
 -- Versión de PHP: 7.2.5
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `mydb`
+-- Base de datos: `negrita`
 --
 
 -- --------------------------------------------------------
@@ -30,15 +30,15 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `factura` (
   `idFactura` int(11) NOT NULL,
-  `tarjeta` int(11) DEFAULT NULL,
-  `clave` longtext,
-  `nombre` int(10) DEFAULT NULL,
-  `apellido` int(10) DEFAULT NULL,
-  `compra` int(10) DEFAULT NULL,
-  `total` decimal(10,0) DEFAULT NULL,
-  `fecha` date DEFAULT NULL,
-  `Productos_idProducto` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `tarjeta` int(11) NOT NULL,
+  `clave` longtext NOT NULL,
+  `nombre` text NOT NULL,
+  `apellido` text NOT NULL,
+  `compra` int(10) NOT NULL,
+  `total` decimal(10,0) NOT NULL,
+  `fecha` date NOT NULL,
+  `productos_idProductos` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -47,10 +47,29 @@ CREATE TABLE `factura` (
 --
 
 CREATE TABLE `inventario` (
-  `ingredientes` int(10) NOT NULL,
-  `cantidad` int(11) DEFAULT NULL,
-  `campo1` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `ingredientes` mediumtext NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `campo1` varchar(45) NOT NULL,
+  `id_Ingrediente` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `inventario`
+--
+
+INSERT INTO `inventario` (`ingredientes`, `cantidad`, `campo1`, `id_Ingrediente`) VALUES
+('Cafe', 100, '100', 'sku00001'),
+('leche entera', 100, '100', 'sku00002'),
+('cacao en polvo', 100, '100', 'sku00003'),
+('azucar', 100, '100', 'sku00004'),
+('cafe chai', 100, '100', 'sku00005'),
+('cafe chai vainilla', 100, '176', 'sku00006'),
+('oreo', 100, '69', 'sku00007'),
+('sirope caramelo', 100, '369', 'sku00008'),
+('hielo', 100, '45', 'sku00009'),
+('agua', 100, '485', 'sku00010'),
+('Cafe cColombiano', 100, '100', 'sku00011'),
+('test', 200, '200', 'sku00012');
 
 -- --------------------------------------------------------
 
@@ -59,17 +78,17 @@ CREATE TABLE `inventario` (
 --
 
 CREATE TABLE `usuarios` (
-  `Id` int(11) NOT NULL,
-  `Usuario` mediumtext,
-  `Pass` char(10) DEFAULT NULL,
-  `Tipo` int(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id` int(11) NOT NULL,
+  `usuario` text NOT NULL,
+  `pass` char(10) NOT NULL,
+  `tipo` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`Id`, `Usuario`, `Pass`, `Tipo`) VALUES
+INSERT INTO `usuarios` (`id`, `usuario`, `pass`, `tipo`) VALUES
 (1, 'Angel', 'muu295t', 1),
 (2, 'Cajero', 'pass', 2);
 
@@ -81,30 +100,19 @@ INSERT INTO `usuarios` (`Id`, `Usuario`, `Pass`, `Tipo`) VALUES
 -- Indices de la tabla `factura`
 --
 ALTER TABLE `factura`
-  ADD PRIMARY KEY (`idFactura`,`Productos_idProducto`),
-  ADD KEY `fk_Factura_Productos_idx` (`Productos_idProducto`);
+  ADD PRIMARY KEY (`idFactura`);
 
 --
 -- Indices de la tabla `inventario`
 --
 ALTER TABLE `inventario`
-  ADD PRIMARY KEY (`ingredientes`);
+  ADD KEY `id_Ingrediente` (`id_Ingrediente`);
 
 --
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `factura`
---
-ALTER TABLE `factura`
-  ADD CONSTRAINT `fk_Factura_Productos` FOREIGN KEY (`Productos_idProducto`) REFERENCES `productos` (`idProducto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD PRIMARY KEY (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
