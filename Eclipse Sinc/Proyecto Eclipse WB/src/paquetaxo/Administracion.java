@@ -178,6 +178,37 @@ public class Administracion extends JFrame {
 				System.out.println("Entra grafica");
 			}
 		});
+		
+		JMenuItem mntmAbrirConsultaProductos = new JMenuItem("Abrir consulta Productos");
+		mntmAbrirConsultaProductos.addMouseListener(new MouseAdapter() {
+		 
+			public void mouseClicked(MouseEvent arg0) {
+				
+
+				
+
+				
+				model.setRowCount(0);
+				conexion.rellenarProductos();
+				frmAdministracion.getContentPane().setEnabled(false);
+			
+				
+				
+			
+				
+			}
+			
+			public void mousePressed(MouseEvent arg0) {
+				
+				model.setRowCount(0);
+				conexion.rellenarProductos();
+				frmAdministracion.getContentPane().setEnabled(false);
+			
+				
+				
+			}
+		});
+		mnBaseDeDatos.add(mntmAbrirConsultaProductos);
 		mnBaseDeDatos.add(mntmGrafica);
 
 		JMenu mnHerramientas = new JMenu("Herramientas");

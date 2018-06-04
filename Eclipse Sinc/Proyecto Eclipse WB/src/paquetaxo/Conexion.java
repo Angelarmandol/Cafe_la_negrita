@@ -282,6 +282,51 @@ public class Conexion {
 
 	}
 
+	public void rellenarProductos(){
+	
+
+
+		System.out.println("Se muestra tabla");
+
+		try {
+			st = this.getConnection().createStatement();
+			rs = st.executeQuery("SELECT * FROM productos");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		try {
+			System.out.println("Entra while");
+			while (rs.next()) {
+				System.out.println("primer while");
+				// Se crea un array que será una de las filas de la tabla.
+				Object[] fila = new Object[2]; // Hay tres columnas en la tabla
+
+				// Se rellena cada posición del array con una de las columnas de
+				// la tabla en base de datos.
+				for (int i = 0; i < 2; i++) {
+					fila[i] = rs.getObject(i + 1); // El primer indice en rs es
+													// el 1, no el cero, por eso
+													// se suma 1.
+					System.out.println("se insertara: " + fila[i]);
+				}
+				// Se añade al modelo la fila completa.
+				Administracion.model.addRow(fila);
+				//Administracion.model.addColumn(null);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	
+		
+	}// fin rellenar productos
+	
+	
 	public void rellenarinventarioEditar() {
 
 		System.out.println("Se muestra tabla");
