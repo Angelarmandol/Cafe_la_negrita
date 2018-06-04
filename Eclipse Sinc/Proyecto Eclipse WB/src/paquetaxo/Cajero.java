@@ -27,7 +27,7 @@ import javax.swing.JFormattedTextField;
 
 public class Cajero {
 
-	int thot = 0;
+	int thot = 0, total = 0;
 	private JFrame frmCajero;
 
 	/**
@@ -55,7 +55,7 @@ public class Cajero {
 
 	private void initialize() {
 		final JFormattedTextField formattedTextField = new JFormattedTextField();
-		final int total = 0;
+		// final int total = 0;
 
 		frmCajero = new JFrame();
 		frmCajero.setEnabled(true);
@@ -69,9 +69,8 @@ public class Cajero {
 
 		JLabel lblImgcajero = new JLabel("imgcajero");
 		lblImgcajero.setBounds(790, 0, 84, 80);
-		lblImgcajero
-				.setIcon(new ImageIcon(
-						"C:\\Users\\neko_\\Documents\\GitHub\\Cafe_la_negrita\\Eclipse Sinc\\Imagenes\\cafenegrita.png"));
+		lblImgcajero.setIcon(new ImageIcon(
+				"C:\\Users\\neko_\\Documents\\GitHub\\Cafe_la_negrita\\Eclipse Sinc\\Imagenes\\cafenegrita.png"));
 		frmCajero.getContentPane().add(lblImgcajero);
 
 		// Cuadro de operacion
@@ -87,8 +86,7 @@ public class Cajero {
 		subTot.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent e) {
-				screenCaja.setText(screenCaja.getText() + "\nSubtotal: $"
-						+ total);
+				screenCaja.setText(screenCaja.getText() + "\nSubtotal: $" + total);
 			}
 		});
 		subTot.addKeyListener(new KeyAdapter() {
@@ -108,42 +106,36 @@ public class Cajero {
 		tot.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent arg0) {
-				
-				try{
-				if(Integer.parseInt(formattedTextField.getText())>0){
-				int valor = Integer.parseInt(formattedTextField.getText());
-				
-				
-				screenCaja.setText(screenCaja.getText() + "\nEfectivo: $"
-						+ valor);
-				thot = valor - total;
-				screenCaja.setText(screenCaja.getText() + "\nCambio: $" + thot);
-				
-				}
-				}
-				catch (Exception e) {
+
+				try {
+					if (Integer.parseInt(formattedTextField.getText()) > 0) {
+						int valor = Integer.parseInt(formattedTextField.getText());
+
+						screenCaja.setText(screenCaja.getText() + "\nEfectivo: $" + valor);
+
+						if (valor < total) {
+							JOptionPane.showMessageDialog(null, "El efectivo es insuficiente");
+						} else {
+							thot = valor - total;
+							screenCaja.setText(screenCaja.getText() + "\nCambio: $" + thot);
+						}
+
+					}
+				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "No se a insertado dinero");
 				}
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+
 				/*
 				 * 
-				 * se necesita validar siu el dinero ingresado es matyor  a la catidad
+				 * se necesita validar siu el dinero ingresado es matyor a la
+				 * catidad
 				 * 
 				 * 
 				 * 
 				 * 
 				 * 
-				 * Cuando se confiemrn l exixstencia 
-				 * de los productos se resta en base d a la cantidad e ingredientes que se necesinar
+				 * Cuando se confiemrn l exixstencia de los productos se resta
+				 * en base d a la cantidad e ingredientes que se necesinar
 				 * 
 				 * 
 				 * 
@@ -151,11 +143,7 @@ public class Cajero {
 				 * 
 				 * 
 				 */
-				
-				
-				
-				
-				
+
 			}
 		});
 		tot.addKeyListener(new KeyAdapter() {
@@ -240,7 +228,7 @@ public class Cajero {
 
 			public void mouseClicked(MouseEvent e) {
 				screenCaja.setText(screenCaja.getText() + "\nExpreso: $25");
-				// total=total+25;
+				total = total + 25;
 			}
 		});
 		cb1.setBounds(10, 11, 89, 23);
@@ -251,7 +239,7 @@ public class Cajero {
 
 			public void mouseClicked(MouseEvent e) {
 				screenCaja.setText(screenCaja.getText() + "\nAmericano: $30");
-				// total=total+30;
+				total = total + 30;
 			}
 		});
 		cb2.setBounds(10, 45, 89, 23);
@@ -262,7 +250,7 @@ public class Cajero {
 
 			public void mouseClicked(MouseEvent e) {
 				screenCaja.setText(screenCaja.getText() + "\nMoka: $35");
-				// total=total+35;
+				total = total + 35;
 			}
 		});
 		cb3.setBounds(10, 79, 89, 23);
@@ -273,7 +261,7 @@ public class Cajero {
 
 			public void mouseClicked(MouseEvent e) {
 				screenCaja.setText(screenCaja.getText() + "\nLatte: $33");
-				// total=total+33;
+				total = total + 33;
 			}
 		});
 		cb4.setBounds(10, 113, 89, 23);
@@ -284,7 +272,7 @@ public class Cajero {
 
 			public void mouseClicked(MouseEvent e) {
 				screenCaja.setText(screenCaja.getText() + "\nChai Spiced: $57");
-				// total=total+57;
+				total = total + 57;
 			}
 		});
 		cb5.setBounds(10, 147, 89, 23);
@@ -294,9 +282,8 @@ public class Cajero {
 		cb6.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent e) {
-				screenCaja.setText(screenCaja.getText()
-						+ "\nChai Vainilla: $63");
-				// total=total+63;
+				screenCaja.setText(screenCaja.getText() + "\nChai Vainilla: $63");
+				total = total + 63;
 			}
 		});
 		cb6.setBounds(10, 181, 89, 23);
@@ -327,7 +314,7 @@ public class Cajero {
 
 			public void mouseClicked(MouseEvent e) {
 				screenCaja.setText(screenCaja.getText() + "\nFrappe Moka: $60");
-				// total=total+60;
+				total = total + 60;
 			}
 		});
 		fb2.setBounds(10, 45, 89, 23);
@@ -337,9 +324,8 @@ public class Cajero {
 		fb3.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent e) {
-				screenCaja.setText(screenCaja.getText()
-						+ "\nFrappe Vainilla: $72");
-				// total=total+72;
+				screenCaja.setText(screenCaja.getText() + "\nFrappe Vainilla: $72");
+				total = total + 72;
 			}
 		});
 		fb3.setBounds(10, 79, 89, 23);
@@ -349,9 +335,8 @@ public class Cajero {
 		fb4.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent e) {
-				screenCaja.setText(screenCaja.getText()
-						+ "\nFrappe Caramelo: $85");
-				// total=total+85;
+				screenCaja.setText(screenCaja.getText() + "\nFrappe Caramelo: $85");
+				total = total + 85;
 			}
 		});
 		fb4.setBounds(10, 113, 89, 23);
@@ -363,6 +348,29 @@ public class Cajero {
 
 		formattedTextField.setBounds(653, 295, 84, 20);
 		frmCajero.getContentPane().add(formattedTextField);
+
+		JButton btnCancel = new JButton("Cancelar");
+		btnCancel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				screenCaja.setText("Cafe la Negrita");
+				total = 0;
+				thot = 0;
+			}
+		});
+		btnCancel.setBounds(653, 327, 89, 23);
+		frmCajero.getContentPane().add(btnCancel);
+
+		JButton btnRecib = new JButton("Imprimir recibo");
+		btnRecib.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(screenCaja.getText());
+				screenCaja.setText("Cafe la Negrita");
+			}
+		});
+		btnRecib.setBounds(752, 327, 122, 23);
+		frmCajero.getContentPane().add(btnRecib);
 
 		// Visibilidad de los frames
 
