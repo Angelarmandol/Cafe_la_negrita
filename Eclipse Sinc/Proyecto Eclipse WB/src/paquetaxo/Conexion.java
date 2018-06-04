@@ -112,6 +112,46 @@ public class Conexion {
 
 	}
 
+	public String consultaPrecio(String sku) throws SQLException {
+		Object ret = null;
+		Statement st = this.getConnection().createStatement();
+		ResultSet rs = st
+				.executeQuery("SELECT * FROM `productos` WHERE `id_Producto` = '"
+						+ sku + "'");
+		while (rs.next()) {
+			System.out.println("El precio de " + sku + " es: "
+					+ rs.getObject("precioPesos"));
+			ret = rs.getObject("precioPesos");
+		}
+
+		rs.close();
+		return ret.toString();
+
+	}
+
+	public void restarUnidades(String sku, int cantidad) {
+		// UPDATE `inventario` SET `cantidad`=cantidad-10 WHERE `id_Ingrediente`
+		// = "sku00001";
+
+		Connection con = Conexion.getConnection();
+		try {
+
+			PreparedStatement pstmt = con
+					.prepareStatement("UPDATE `inventario` SET `cantidad` = `cantidad`-"
+							+ cantidad
+							+ " WHERE `id_Ingrediente` = '"
+							+ sku
+							+ "';");
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println("ocurrio un error");
+
+		}
+
+	}
+
 	public void login(String nom, String pass, int tipo) throws SQLException {
 
 		Statement st = this.getConnection().createStatement();
@@ -165,8 +205,6 @@ public class Conexion {
 
 		System.out.println("Se muestra tabla");
 
-	 
-
 		try {
 			st = this.getConnection().createStatement();
 			rs = st.executeQuery("SELECT * FROM usuarios");
@@ -210,8 +248,6 @@ public class Conexion {
 	public void rellenarInventario() {
 
 		System.out.println("Se muestra tabla");
-
-	
 
 		try {
 			st = this.getConnection().createStatement();
@@ -337,10 +373,8 @@ public class Conexion {
 								+ modelo.getValueAt(x, 1).toString()
 								+ ", `campo1` ="
 								+ modelo.getValueAt(x, 2).toString()
-								+ " WHERE id_Ingrediente = '"
-								+ ids[x]
-								+ "';");
- 
+								+ " WHERE id_Ingrediente = '" + ids[x] + "';");
+
 				pstmt.executeUpdate();
 
 			}

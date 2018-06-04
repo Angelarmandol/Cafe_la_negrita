@@ -21,14 +21,21 @@ import javax.swing.AbstractButton;
 import javax.swing.AbstractListModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+
 import javax.swing.JScrollBar;
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
+import javax.swing.BoxLayout;
+import javax.swing.DropMode;
 
 public class Cajero {
 
 	int thot = 0, total = 0;
 	private JFrame frmCajero;
+	Conexion conexion = new Conexion();
+
+	int productos[] = new int[10];
 
 	/**
 	 * Launch the application.
@@ -66,27 +73,178 @@ public class Cajero {
 		frmCajero.setBounds(100, 100, 890, 530);
 		frmCajero.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmCajero.getContentPane().setLayout(null);
-
-		JLabel lblImgcajero = new JLabel("imgcajero");
-		lblImgcajero.setBounds(790, 0, 84, 80);
-		lblImgcajero.setIcon(new ImageIcon(
-				"C:\\Users\\neko_\\Documents\\GitHub\\Cafe_la_negrita\\Eclipse Sinc\\Imagenes\\cafenegrita.png"));
-		frmCajero.getContentPane().add(lblImgcajero);
+		final JTextPane screenCaja = new JTextPane();
+		screenCaja.setBounds(523, 71, 331, 187);
+		frmCajero.getContentPane().add(screenCaja);
 
 		// Cuadro de operacion
 
-		final JTextPane screenCaja = new JTextPane();
 		// screenCaja.setText("a");
 		screenCaja.setEnabled(false);
 		screenCaja.setText("Cafe la Negrita");
-		screenCaja.setBounds(577, 87, 254, 172);
-		frmCajero.getContentPane().add(screenCaja);
+		JLabel lblImgcajero = new JLabel("imgcajero");
+		lblImgcajero.setBounds(790, 0, 84, 80);
+		lblImgcajero
+				.setIcon(new ImageIcon(
+						"C:\\Users\\neko_\\Documents\\GitHub\\Cafe_la_negrita\\Eclipse Sinc\\Imagenes\\cafenegrita.png"));
+		frmCajero.getContentPane().add(lblImgcajero);
 
 		JButton subTot = new JButton("SubTotal");
+		subTot.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		subTot.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent e) {
-				screenCaja.setText(screenCaja.getText() + "\nSubtotal: $" + total);
+				screenCaja.setText(screenCaja.getText() + "\nSubtotal: $"
+						+ total);
+
+				for (int x = 0; x <= 9; x++) {
+					System.out.println("Cantidad de productos " + x + ": "
+							+ productos[x]);
+
+					switch (x) {
+					case 0:
+						while (productos[x] > 0) {
+							System.out.println("borrando" + productos[x]);
+							conexion.restarUnidades("sku00001", 15);
+							productos[x] = productos[x] - 1;
+						}
+						break;
+						
+						
+					case 1:
+						while (productos[x] > 0) {
+							System.out.println("borrando" + productos[x]);
+							
+							conexion.restarUnidades("sku00001", 15); //15 de cafe
+							conexion.restarUnidades("sku00001", 15); //15 de cafe
+							conexion.restarUnidades("sku00002", 120); //120 de leche
+							
+							productos[x] = productos[x] - 1;
+						}
+						break;	
+						
+						
+					case 2:
+						while (productos[x] > 0) {
+							System.out.println("borrando" + productos[x]);
+							
+							conexion.restarUnidades("sku00001", 15); //15 de cafe
+							conexion.restarUnidades("sku00002", 120); //120 de leche
+							conexion.restarUnidades("sku00003", 60); //60 polvo caca0
+							conexion.restarUnidades("sku00004", 35); //35 azucar
+							
+							
+							productos[x] = productos[x] - 1;
+						}
+						break;
+				
+						
+					case 3:
+						while (productos[x] > 0) {
+							System.out.println("borrando" + productos[x]);
+							
+							conexion.restarUnidades("sku00002", 170); //170 de leche
+							conexion.restarUnidades("sku00001", 30); //30 de cafe
+							conexion.restarUnidades("sku00004", 35); //35 azucar
+							
+							
+							productos[x] = productos[x] - 1;
+						}
+						break;
+						
+						
+					case 4:
+						while (productos[x] > 0) {
+							System.out.println("borrando" + productos[x]);
+							
+							conexion.restarUnidades("sku00005", 35); //35 chai	
+							conexion.restarUnidades("sku00001", 30); //30 de cafe
+							conexion.restarUnidades("sku00004", 35); //35 azucar
+							
+							productos[x] = productos[x] - 1;
+						}
+						break;
+						
+					case 5:
+						while (productos[x] > 0) {
+							System.out.println("borrando" + productos[x]);
+							
+							
+							conexion.restarUnidades("sku00006", 35); //35 chai vainilla
+							conexion.restarUnidades("sku00001", 30); //30 de cafe
+							conexion.restarUnidades("sku00004", 35); //35 azucar
+							
+							
+							productos[x] = productos[x] - 1;
+						}
+						break;
+						
+					case 6:
+						while (productos[x] > 0) {
+							System.out.println("borrando" + productos[x]);
+							
+							conexion.restarUnidades("sku00001", 30); //30 de cafe
+							conexion.restarUnidades("sku00004", 40); //40 azucar
+							conexion.restarUnidades("sku00002", 125); //125 de leche
+							
+							productos[x] = productos[x] - 1;
+						}
+						break;
+						
+						
+						
+					case 7:
+						while (productos[x] > 0) {
+							System.out.println("borrando" + productos[x]);
+							
+							conexion.restarUnidades("sku00001", 30); //30 de cafe
+							conexion.restarUnidades("sku00003", 60); //60 polvo caca0
+							conexion.restarUnidades("sku00004", 40); //40 azucar
+							conexion.restarUnidades("sku00002", 125); //125 de leche
+							
+							productos[x] = productos[x] - 1;
+						}
+						break;
+						
+						
+						
+					case 8:
+						while (productos[x] > 0) {
+							System.out.println("borrando" + productos[x]);
+							
+							conexion.restarUnidades("sku00006", 30); //30 cafe vainilla
+							conexion.restarUnidades("sku00002", 240); //125 de leche
+							productos[x] = productos[x] - 1;
+						}
+						break;
+						
+						
+						
+						
+						
+					case 9:
+						while (productos[x] > 0) {
+							System.out.println("borrando" + productos[x]);
+							
+							conexion.restarUnidades("sku00001", 30); //30 de cafe
+							conexion.restarUnidades("sku00008", 150); //150 de cafe
+							conexion.restarUnidades("sku00002", 240); //125 de leche
+							conexion.restarUnidades("sku00004", 40); //40 azucar
+							
+							productos[x] = productos[x] - 1;
+						}
+						break;
+						
+						
+						
+						
+					}
+
+				}// fin for productos
+
 			}
 		});
 		subTot.addKeyListener(new KeyAdapter() {
@@ -109,20 +267,25 @@ public class Cajero {
 
 				try {
 					if (Integer.parseInt(formattedTextField.getText()) > 0) {
-						int valor = Integer.parseInt(formattedTextField.getText());
+						int valor = Integer.parseInt(formattedTextField
+								.getText());
 
-						screenCaja.setText(screenCaja.getText() + "\nEfectivo: $" + valor);
+						screenCaja.setText(screenCaja.getText()
+								+ "\nEfectivo: $" + valor);
 
 						if (valor < total) {
-							JOptionPane.showMessageDialog(null, "El efectivo es insuficiente");
+							JOptionPane.showMessageDialog(null,
+									"El efectivo es insuficiente");
 						} else {
 							thot = valor - total;
-							screenCaja.setText(screenCaja.getText() + "\nCambio: $" + thot);
+							screenCaja.setText(screenCaja.getText()
+									+ "\nCambio: $" + thot);
 						}
 
 					}
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, "No se a insertado dinero");
+					JOptionPane.showMessageDialog(null,
+							"No se a insertado dinero");
 				}
 
 				/*
@@ -136,12 +299,6 @@ public class Cajero {
 				 * 
 				 * Cuando se confiemrn l exixstencia de los productos se resta
 				 * en base d a la cantidad e ingredientes que se necesinar
-				 * 
-				 * 
-				 * 
-				 * 
-				 * 
-				 * 
 				 */
 
 			}
@@ -224,66 +381,151 @@ public class Cajero {
 		// Opciones cafe
 
 		JButton cb1 = new JButton("Expresso");
+		cb1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		cb1.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent e) {
-				screenCaja.setText(screenCaja.getText() + "\nExpreso: $25");
-				total = total + 25;
+
+				String precio = "0";
+				try {
+					precio = conexion.consultaPrecio("sku00014");
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				screenCaja.setText(screenCaja.getText() + "\nExpreso: "
+						+ precio);
+				total = total + Integer.parseInt(precio);
+
+				productos[0] = productos[0] + 1;
 			}
 		});
+
 		cb1.setBounds(10, 11, 89, 23);
 		internalFrame1.getContentPane().add(cb1);
 
 		JButton cb2 = new JButton("Americano");
+		cb2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		cb2.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent e) {
-				screenCaja.setText(screenCaja.getText() + "\nAmericano: $30");
-				total = total + 30;
+				String precio = "0";
+				try {
+					precio = conexion.consultaPrecio("sku00015");
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				screenCaja.setText(screenCaja.getText() + "\nAmericano: "
+						+ precio);
+				total = total + Integer.parseInt(precio);
+				productos[1] = productos[1] + 1;
 			}
 		});
 		cb2.setBounds(10, 45, 89, 23);
 		internalFrame1.getContentPane().add(cb2);
 
 		JButton cb3 = new JButton("Moka");
+		cb3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		cb3.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent e) {
-				screenCaja.setText(screenCaja.getText() + "\nMoka: $35");
-				total = total + 35;
+				String precio = "0";
+				try {
+					precio = conexion.consultaPrecio("sku00016");
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				screenCaja.setText(screenCaja.getText() + "\nMoka: " + precio);
+				total = total + Integer.parseInt(precio);
+				productos[2] = productos[2] + 1;
 			}
 		});
 		cb3.setBounds(10, 79, 89, 23);
 		internalFrame1.getContentPane().add(cb3);
 
 		JButton cb4 = new JButton("Latte");
+		cb4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		cb4.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent e) {
-				screenCaja.setText(screenCaja.getText() + "\nLatte: $33");
-				total = total + 33;
+				String precio = "0";
+				try {
+					precio = conexion.consultaPrecio("sku00017");
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				screenCaja.setText(screenCaja.getText() + "\nLatte: " + precio);
+				total = total + Integer.parseInt(precio);
+
+				productos[3] = productos[3] + 1;
 			}
 		});
 		cb4.setBounds(10, 113, 89, 23);
 		internalFrame1.getContentPane().add(cb4);
 
 		JButton cb5 = new JButton("Chai spiced");
+		cb5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		cb5.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent e) {
-				screenCaja.setText(screenCaja.getText() + "\nChai Spiced: $57");
-				total = total + 57;
+				String precio = "0";
+				try {
+					precio = conexion.consultaPrecio("sku00018");
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				screenCaja.setText(screenCaja.getText() + "\nChai: " + precio);
+				total = total + Integer.parseInt(precio);
+				productos[4] = productos[4] + 1;
 			}
 		});
 		cb5.setBounds(10, 147, 89, 23);
 		internalFrame1.getContentPane().add(cb5);
 
 		JButton cb6 = new JButton("Chai vainilla");
+		cb6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		cb6.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent e) {
-				screenCaja.setText(screenCaja.getText() + "\nChai Vainilla: $63");
-				total = total + 63;
+				String precio = "0";
+				try {
+					precio = conexion.consultaPrecio("sku00019");
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				screenCaja.setText(screenCaja.getText() + "\nChai Vainilla: "
+						+ precio);
+				total = total + Integer.parseInt(precio);
+				productos[5] = productos[5] + 1;
 			}
 		});
 		cb6.setBounds(10, 181, 89, 23);
@@ -299,44 +541,102 @@ public class Cajero {
 		// Opciones de Frappe
 
 		JButton fb1 = new JButton("Latte");
+		fb1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		fb1.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent e) {
-				screenCaja.setText(screenCaja.getText() + "\nFrappe Latte: $55");
-				// total=total+55;
+				String precio = "0";
+				try {
+					precio = conexion.consultaPrecio("sku00020");
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				screenCaja.setText(screenCaja.getText() + "\nFrappe latte: "
+						+ precio);
+				total = total + Integer.parseInt(precio);
+				productos[6] = productos[6] + 1;
 			}
 		});
 		fb1.setBounds(10, 11, 89, 23);
 		internalFrame2.getContentPane().add(fb1);
 
 		JButton fb2 = new JButton("Moka");
+		fb2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		fb2.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent e) {
-				screenCaja.setText(screenCaja.getText() + "\nFrappe Moka: $60");
-				total = total + 60;
+				String precio = "0";
+				try {
+					precio = conexion.consultaPrecio("sku00021");
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				screenCaja.setText(screenCaja.getText() + "\nFrappe Moka: "
+						+ precio);
+				total = total + Integer.parseInt(precio);
+
+				productos[7] = productos[7] + 1;
 			}
 		});
 		fb2.setBounds(10, 45, 89, 23);
 		internalFrame2.getContentPane().add(fb2);
 
 		JButton fb3 = new JButton("Vainilla");
+		fb3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		fb3.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent e) {
-				screenCaja.setText(screenCaja.getText() + "\nFrappe Vainilla: $72");
-				total = total + 72;
+				String precio = "0";
+				try {
+					precio = conexion.consultaPrecio("sku00022");
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				screenCaja.setText(screenCaja.getText() + "\nFrappe Vainilla: "
+						+ precio);
+				total = total + Integer.parseInt(precio);
+
+				productos[8] = productos[8] + 1;
 			}
 		});
 		fb3.setBounds(10, 79, 89, 23);
 		internalFrame2.getContentPane().add(fb3);
 
 		JButton fb4 = new JButton("Caramelo");
+		fb4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		fb4.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent e) {
-				screenCaja.setText(screenCaja.getText() + "\nFrappe Caramelo: $85");
-				total = total + 85;
+				String precio = "0";
+				try {
+					precio = conexion.consultaPrecio("sku00023");
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				screenCaja.setText(screenCaja.getText() + "\nFrappe Caramelo: "
+						+ precio);
+				total = total + Integer.parseInt(precio);
+				productos[9] = productos[9] + 1;
 			}
 		});
 		fb4.setBounds(10, 113, 89, 23);
@@ -350,12 +650,17 @@ public class Cajero {
 		frmCajero.getContentPane().add(formattedTextField);
 
 		JButton btnCancel = new JButton("Cancelar");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnCancel.addMouseListener(new MouseAdapter() {
-			@Override
+
 			public void mouseClicked(MouseEvent e) {
 				screenCaja.setText("Cafe la Negrita");
 				total = 0;
 				thot = 0;
+				vaciarListaDeProductos();
 			}
 		});
 		btnCancel.setBounds(653, 327, 89, 23);
@@ -363,7 +668,7 @@ public class Cajero {
 
 		JButton btnRecib = new JButton("Imprimir recibo");
 		btnRecib.addMouseListener(new MouseAdapter() {
-			@Override
+
 			public void mouseClicked(MouseEvent e) {
 				System.out.println(screenCaja.getText());
 				screenCaja.setText("Cafe la Negrita");
@@ -411,7 +716,100 @@ public class Cajero {
 
 	}
 
-	public void calculadora() {
+	public void vaciarListaDeProductos() {
+		for (int x = 0; x <= 9; x++) {
+			System.out.println("Cantidad de productos " + x + ": "
+					+ productos[x]);
 
+			switch (x) {
+			case 0:
+				while (productos[x] > 0) {
+					System.out.println("borrando" + productos[x]);
+					productos[x] = productos[x] - 1;
+				}
+				break;
+				
+				
+			case 1:
+				while (productos[x] > 0) {
+					System.out.println("borrando" + productos[x]);
+					productos[x] = productos[x] - 1;
+				}
+				break;	
+				
+				
+			case 2:
+				while (productos[x] > 0) {
+					System.out.println("borrando" + productos[x]);
+					productos[x] = productos[x] - 1;
+				}
+				break;
+		
+				
+			case 3:
+				while (productos[x] > 0) {
+					System.out.println("borrando" + productos[x]);
+					productos[x] = productos[x] - 1;
+				}
+				break;
+				
+				
+			case 4:
+				while (productos[x] > 0) {
+					System.out.println("borrando" + productos[x]);
+					productos[x] = productos[x] - 1;
+				}
+				break;
+				
+			case 5:
+				while (productos[x] > 0) {
+					System.out.println("borrando" + productos[x]);
+					productos[x] = productos[x] - 1;
+				}
+				break;
+				
+			case 6:
+				while (productos[x] > 0) {
+					System.out.println("borrando" + productos[x]);
+					productos[x] = productos[x] - 1;
+				}
+				break;
+				
+				
+				
+			case 7:
+				while (productos[x] > 0) {
+					System.out.println("borrando" + productos[x]);
+					productos[x] = productos[x] - 1;
+				}
+				break;
+				
+				
+				
+			case 8:
+				while (productos[x] > 0) {
+					System.out.println("borrando" + productos[x]);
+					productos[x] = productos[x] - 1;
+				}
+				break;
+				
+				
+				
+				
+				
+			case 9:
+				while (productos[x] > 0) {
+					System.out.println("borrando" + productos[x]);
+					productos[x] = productos[x] - 1;
+				}
+				break;
+				
+				
+				
+				
+			}
+
+		}// fin for productos
+		
 	}
 }
