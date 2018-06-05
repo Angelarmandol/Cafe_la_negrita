@@ -10,11 +10,16 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import java.awt.SystemColor;
+import java.sql.SQLException;
+
 import javax.swing.JInternalFrame;
+import javax.swing.ImageIcon;
 
 public class Pantalla {
 
 	private JFrame frame;
+	
+	Conexion conexion = new Conexion();
 
 	/**
 	 * Launch the application.
@@ -70,11 +75,24 @@ public class Pantalla {
 		panel.setBounds(0, 0, 20, 23);
 		frame.getContentPane().add(panel);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(SystemColor.inactiveCaptionText);
-		panel_1.setBounds(1, 1, 478, 225);
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(Pantalla.class.getResource("/Imagenes/CASA.jpg")));
+		lblNewLabel.setBounds(96, 57, 132, 142);
+	 
+		frame.getContentPane().add(lblNewLabel);
 		
-		frame.getContentPane().add(panel_1);
+		String textExpresso= "preguntar ";
+		try {
+			textExpresso="$"+ conexion.consultaPrecio("sku00014").toString()+"M.N.";
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+		JLabel label = new JLabel(textExpresso);
+		label.setBounds(68, 210, 200, 50);
+		frame.getContentPane().add(label);
 		frame.setType(Type.UTILITY);
 		frame.setBounds(100, 100, 615, 390);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

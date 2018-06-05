@@ -692,8 +692,8 @@ public class Conexion {
 								+ modelo.getValueAt(x, 3).toString()
 								+ "', `precioPesos` ='"
 								+ modelo.getValueAt(x, 4).toString()
-								+ "' WHERE id_Producto = '" + ids[x] + "';");
-				 
+								+ "' WHERE id_Producto = '" + modelo.getValueAt(x, 0).toString() + "';");
+				 System.out.println("se supone precio: "+ modelo.getValueAt(x, 4));
 				pstmt.executeUpdate();
 			
 			}

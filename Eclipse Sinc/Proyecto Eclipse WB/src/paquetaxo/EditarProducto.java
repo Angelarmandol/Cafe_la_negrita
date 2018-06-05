@@ -168,6 +168,8 @@ public class EditarProducto {
 		JButton btnAceptar = new JButton("Aplicar cambios");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+			
+				
 				
 				Object[] ids= new Object[model2.getRowCount()];
 				System.out.println("TAmaño del modelo:" +model2.getRowCount());
