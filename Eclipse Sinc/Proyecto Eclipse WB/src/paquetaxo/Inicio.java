@@ -99,7 +99,7 @@ public class Inicio {
 		buttonGroup.add(rdbtnNewRadioButton);
 		panel.add(rdbtnNewRadioButton);
 		final Administracion admin = new Administracion();
-		final EditarProducto ed = new EditarProducto();
+		final EditarInventario ed = new EditarInventario();
 		
 		JButton btnIniciar = new JButton("Iniciar");
 		btnIniciar.addMouseListener(new MouseAdapter() {

@@ -18,7 +18,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class EditarProducto {
+public class EditarInventario {
 
 	private JFrame frmEditarProducto;
 	public JTable table = new JTable();
@@ -43,7 +43,7 @@ public class EditarProducto {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EditarProducto window = new EditarProducto();
+					EditarInventario window = new EditarInventario();
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -57,7 +57,7 @@ public class EditarProducto {
 	 * 
 	 * @wbp.parser.entryPoint
 	 */
-	public EditarProducto() {
+	public EditarInventario() {
 		initailize();
 	}
 
@@ -69,14 +69,14 @@ public class EditarProducto {
 		frmEditarProducto = new JFrame();
 
 		frmEditarProducto.setType(Type.UTILITY);
-		frmEditarProducto.setTitle("Editar Producto");
+		frmEditarProducto.setTitle("Editar Inventario");
 		frmEditarProducto.setBounds(100, 100, 635, 407);
 		frmEditarProducto.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmEditarProducto.getContentPane().setLayout(null);
 
 		frmEditarProducto.setVisible(true);
 
-		conexion.rellenarProductoEditar();
+		conexion.rellenarinventarioEditar();
 
 		table.setBounds(23, 36, 566, 286);
 		table.setModel(model2);
@@ -90,7 +90,8 @@ public class EditarProducto {
 		textField.addKeyListener(new KeyAdapter() {
 
 			public void keyPressed(KeyEvent tecla) {
- 
+
+				model2.setRowCount(0);
 				if (tecla.getKeyCode() == 10) {
 					 
 					String texto = null;
@@ -102,13 +103,13 @@ public class EditarProducto {
 						
 						if (textField.getText().equals("todo")){
 							model2.setRowCount(0);
-							conexion.todosProductos();
+							conexion.todos();
 							table.setModel(model2);
-							System.out.println("enter Se mostrara todo/*/*/*");
+							System.out.println("Se mostrara todo/*/*/*");
 						}
 						System.out.println("TExto jfield:"+textField.getText());
 						model2.setRowCount(0);
-						conexion.BuscarParaEditarProductos(textField.getText());
+						conexion.BuscarParaeditar(textField.getText());
 						table.setModel(model2);
 					}
 					
@@ -124,10 +125,6 @@ public class EditarProducto {
 		textField.setColumns(10);
 
 		JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		btnBuscar.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent arg0) {
@@ -141,14 +138,14 @@ public class EditarProducto {
 					
 					if (textField.getText().equals("todo")){
 						model2.setRowCount(0);
-						conexion.todosProductos();
+						conexion.todos();
 						table.setModel(model2);
 						System.out.println("Se mostrara todo/*/*/*");
 					}
 
 					System.out.println("TExto jfield:"+textField.getText());
 					model2.setRowCount(0);
-					conexion.BuscarParaEditarProductos(textField.getText());
+					conexion.BuscarParaeditar(textField.getText());
 					table.setModel(model2);
 				}
 			}
@@ -173,7 +170,7 @@ public class EditarProducto {
 				System.out.println("TAmaño del modelo:" +model2.getRowCount());
 				for(int i=0; i<model2.getRowCount(); i++){
 					
-					ids[i]=model2.getValueAt(i, 0);
+					ids[i]=model2.getValueAt(i, 3);
 					System.out.println("ids: "+ids[i]);
 				}
 				
@@ -181,7 +178,7 @@ public class EditarProducto {
 				System.out.println("nombre: "+model2.getValueAt(0, 0));
 				System.out.println("in1: "+model2.getValueAt(0, 1));
 				System.out.println("in2: "+model2.getValueAt(0, 2));
-			 	conexion.editarProducto(model2, ids, model2.getRowCount());
+				conexion.editar(model2, ids, model2.getRowCount());
 			 
 				
 			}

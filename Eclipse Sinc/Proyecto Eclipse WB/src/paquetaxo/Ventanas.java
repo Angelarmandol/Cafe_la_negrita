@@ -45,7 +45,7 @@ public class Ventanas {
 	
 	
 	Administracion pantallaAdmin = new Administracion();
-	EditarProducto PantallaEditar = new EditarProducto();
+	EditarInventario PantallaEditar = new EditarInventario();
 	Cajero pantallaCaja=new Cajero();
 	
 	

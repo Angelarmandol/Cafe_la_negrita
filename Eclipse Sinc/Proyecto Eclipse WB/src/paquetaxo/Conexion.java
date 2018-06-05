@@ -52,32 +52,6 @@ public class Conexion {
 	String nombre, grupo;
 	public boolean seEncontro;
 
-	public void altas() throws IOException {
-		Connection con = Conexion.getConnection();
-
-		try {
-			PreparedStatement pstmt = con
-					.prepareStatement("insert into productos(id_producto, nombre,presio,grupo)values(?,?,?)");
-
-			System.out.println("nombre del alumno:");
-			nombre = tcl.readLine();
-			System.out.println("matricula del alumno:");
-			matricula = Integer.parseInt(tcl.readLine());
-			System.out.println("grupo del alumno:");
-			grupo = tcl.readLine();
-
-			pstmt.setString(1, nombre);
-			pstmt.setInt(2, matricula);
-			pstmt.setString(3, grupo);
-			pstmt.executeUpdate();
-
-		} catch (SQLException e) {
-			System.out.println("ocurrio algun error");
-
-		}
-
-	}
-
 	public void mostrar() {
 
 	}
@@ -214,6 +188,12 @@ public class Conexion {
 			e.printStackTrace();
 		}
 		try {
+
+			if (Administracion.modelUsuarios.getColumnCount() < 2) {
+				Administracion.modelUsuarios.addColumn("putosUsuarios");
+				Administracion.modelUsuarios.addColumn("putosskus");
+			}
+
 			System.out.println("Entra while");
 			while (rs.next()) {
 				System.out.println("primer while");
@@ -229,7 +209,7 @@ public class Conexion {
 					System.out.println("se insertara: " + fila[i]);
 				}
 				// Se añade al modelo la fila completa.
-				Administracion.model.addRow(fila);
+				Administracion.modelUsuarios.addRow(fila);
 
 			}
 		} catch (SQLException e) {
@@ -258,6 +238,12 @@ public class Conexion {
 			e.printStackTrace();
 		}
 		try {
+
+			if (Administracion.modelUsuarios.getColumnCount() < 2) {
+				Administracion.modelUsuarios.addColumn("putosUsuarios");
+				Administracion.modelUsuarios.addColumn("putosskus");
+			}
+
 			System.out.println("Entra while");
 			while (rs.next()) {
 				System.out.println("primer while");
@@ -270,10 +256,10 @@ public class Conexion {
 					fila[i] = rs.getObject(i + 1); // El primer indice en rs es
 													// el 1, no el cero, por eso
 													// se suma 1.
-					System.out.println("se insertara: " + fila[i]);
+					System.out.println(" se insertara: " + fila[i]);
 				}
 				// Se añade al modelo la fila completa.
-				Administracion.model.addRow(fila);
+				Administracion.modelUsuarios.addRow(fila);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -282,9 +268,7 @@ public class Conexion {
 
 	}
 
-	public void rellenarProductos(){
-	
-
+	public void rellenarProductos() {
 
 		System.out.println("Se muestra tabla");
 
@@ -296,18 +280,18 @@ public class Conexion {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 		try {
 			System.out.println("Entra while");
+
 			while (rs.next()) {
 				System.out.println("primer while");
 				// Se crea un array que será una de las filas de la tabla.
-				Object[] fila = new Object[2]; // Hay tres columnas en la tabla
+				Object[] fila = new Object[5]; // Hay tres columnas en la tabla
 
 				// Se rellena cada posición del array con una de las columnas de
 				// la tabla en base de datos.
-				for (int i = 0; i < 2; i++) {
+				for (int i = 0; i < 5; i++) {
 					fila[i] = rs.getObject(i + 1); // El primer indice en rs es
 													// el 1, no el cero, por eso
 													// se suma 1.
@@ -315,29 +299,31 @@ public class Conexion {
 				}
 				// Se añade al modelo la fila completa.
 				Administracion.model.addRow(fila);
-				//Administracion.model.addColumn(null);
+
+				System.out.println("total de rows: "
+						+ Administracion.model.getColumnCount());
+				// Administracion.model.addColumn(null);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-	
-		
 	}// fin rellenar productos
-	
-	
+
 	public void rellenarinventarioEditar() {
 
 		System.out.println("Se muestra tabla");
 
-		EditarProducto.model.addColumn("Ingrediente");
-		EditarProducto.model.addColumn("cantidad");
-		EditarProducto.model.addColumn("1");
-		EditarProducto.model.addColumn("id");
+		EditarInventario.model.addColumn("ufffff papà");
+		EditarInventario.model
+				.addColumn("pero mira como esta ese consumo de memoria innecesario");
+		EditarInventario.model.addColumn(" y me vale verga sigo comentando");
+		EditarInventario.model
+				.addColumn("ponte a programar en vez de andar copiando codigo de github");
 		try {
 			st = this.getConnection().createStatement();
-			rs = st.executeQuery("SELECT * FROM inventario");
+			rs = st.executeQuery("SELECT * FROM inventario ");
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -357,6 +343,51 @@ public class Conexion {
 													// el 1, no el cero, por eso
 													// se suma 1.
 					System.out.println("se insertara: " + fila[i]);
+				}
+				// Se añade al modelo la fila completa.
+				EditarInventario.model.addRow(fila);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public void rellenarProductoEditar() {
+
+		System.out.println("Se muestra tabla");
+
+		EditarProducto.model.addColumn("ufffff papà");
+		EditarProducto.model
+				.addColumn("pero mira como esta ese consumo de memoria innecesario");
+		EditarProducto.model.addColumn(" y me vale verga sigo comentando");
+		EditarProducto.model
+				.addColumn("ponte a programar en vez de andar copiando codigo de github");
+		EditarProducto.model.addColumn("puto");
+		EditarProducto.model.addColumn("puto");
+		try {
+			st = this.getConnection().createStatement();
+			rs = st.executeQuery("SELECT * FROM productos ");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			System.out.println("Entra while");
+			while (rs.next()) {
+				System.out.println("primer while");
+				// Se crea un array que será una de las filas de la tabla.
+				Object[] fila = new Object[5]; // Hay tres columnas en la tabla
+
+				// Se rellena cada posición del array con una de las columnas de
+				// la tabla en base de datos.
+				for (int i = 0; i < 5; i++) {
+					fila[i] = rs.getObject(i + 1); // El primer indice en rs es
+													// el 1, no el cero, por eso
+													// se suma 1.
+					System.out.println("  se insertara: " + fila[i]);
 				}
 				// Se añade al modelo la fila completa.
 				EditarProducto.model.addRow(fila);
@@ -372,10 +403,187 @@ public class Conexion {
 
 		System.out.println("Se muestra tabla");
 
+		if (busqueda.equals("todo")) {
+			System.out.println("se va amostrarrrr");
+
+			try {
+				st = this.getConnection().createStatement();
+				rs = st.executeQuery("SELECT * FROM `inventario` WHERE 1");
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				System.out.println("Entra while");
+				while (rs.next()) {
+					System.out.println("primer while");
+					// Se crea un array que será una de las filas de la tabla.
+					Object[] fila = new Object[4]; // Hay tres columnas en la
+													// tabla
+
+					// Se rellena cada posición del array con una de las
+					// columnas de
+					// la tabla en base de datos.
+					for (int i = 0; i < 4; i++) {
+						fila[i] = rs.getObject(i + 1); // El primer indice en rs
+														// es
+														// el 1, no el cero, por
+														// eso
+														// se suma 1.
+						System.out.println("//Inventaio se insertara: "
+								+ fila[i]);
+					}
+					// Se añade al modelo la fila completa.
+					EditarInventario.model2.addRow(fila);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		} else {
+
+			try {
+				st = this.getConnection().createStatement();
+				rs = st.executeQuery("SELECT * FROM `inventario` WHERE ingredientes LIKE '%"
+						+ busqueda + "%' ");
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				System.out.println("Entra while");
+				while (rs.next()) {
+					System.out.println("primer while");
+					// Se crea un array que será una de las filas de la tabla.
+					Object[] fila = new Object[4]; // Hay tres columnas en la
+													// tabla
+
+					// Se rellena cada posición del array con una de las
+					// columnas de
+					// la tabla en base de datos.
+					for (int i = 0; i < 4; i++) {
+						fila[i] = rs.getObject(i + 1); // El primer indice en rs
+														// es
+														// el 1, no el cero, por
+														// eso
+														// se suma 1.
+						System.out.println("se insertara: " + fila[i]);
+					}
+					// Se añade al modelo la fila completa.
+					EditarInventario.model2.addRow(fila);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+
+	}
+
+	public void BuscarParaEditarProductos(String busqueda) {
+
+		if (EditarProducto.model2.getColumnCount() < 6) {
+			while (EditarProducto.model2.getColumnCount() < 5) {
+				System.out.println("-------------- E count es:"
+						+ EditarProducto.model2.getColumnCount());
+				EditarProducto.model2.addColumn("puto");
+			}
+		}
+		System.out.println("Se muestra tabla");
+
+		if (busqueda.equals("todo")) {
+			System.out.println("se va amostrarrrr");
+
+			try {
+				st = this.getConnection().createStatement();
+				rs = st.executeQuery("SELECT * FROM `productos` WHERE 1");
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+		
+				while (rs.next()) {
+					
+					// Se crea un array que será una de las filas de la tabla.
+					Object[] fila = new Object[5]; // Hay tres columnas en la
+													// tabla
+
+					// Se rellena cada posición del array con una de las
+					// columnas de
+					// la tabla en base de datos.
+					for (int i = 0; i < 5; i++) {
+						fila[i] = rs.getObject(i + 1); // El primer indice en rs
+														// es
+														// el 1, no el cero, por
+														// eso
+														// se suma 1.
+						System.out.println("Productos // se insertara: "
+								+ fila[i]);
+					}
+					// Se añade al modelo la fila completa.
+					EditarProducto.model2.addRow(fila);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		} else {
+
+			try {
+
+				st = this.getConnection().createStatement();
+				rs = st.executeQuery("SELECT * FROM `productos` WHERE nombre LIKE '%"
+						+ busqueda + "%' ");
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				System.out.println("Entra while");
+				while (rs.next()) {
+					System.out.println("primer while");
+					// Se crea un array que será una de las filas de la tabla.
+					Object[] fila = new Object[5]; // Hay tres columnas en la
+													// tabla
+
+					// Se rellena cada posición del array con una de las
+					// columnas del
+					// la tabla en base de datos.
+					for (int i = 0; i < 5; i++) {
+						fila[i] = rs.getObject(i + 1); // El primer indice en rs
+														// es
+														// el 1, no el cero, por
+														// eso
+														// se suma 1.
+						System.out.println(" 5 se insertara: " + fila[i]);
+					}
+					// Se añade al modelo la fila completa.
+					EditarProducto.model2.addRow(fila);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+
+	}
+
+	public void todos() {
+
+		System.out.println("Se muestra tabla");
+
 		try {
 			st = this.getConnection().createStatement();
-			rs = st.executeQuery("SELECT * FROM `inventario` WHERE ingredientes LIKE '%"
-					+ busqueda + "%' ");
+			rs = st.executeQuery("SELECT * FROM `inventario` WHERE 1");
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -394,7 +602,44 @@ public class Conexion {
 					fila[i] = rs.getObject(i + 1); // El primer indice en rs es
 													// el 1, no el cero, por eso
 													// se suma 1.
-					System.out.println("se insertara: " + fila[i]);
+					System.out.println(" se insertara: " + fila[i]);
+				}
+				// Se añade al modelo la fila completa.
+				EditarInventario.model2.addRow(fila);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public void todosProductos() {
+
+		System.out.println("Se muestra tabla");
+
+		try {
+			st = this.getConnection().createStatement();
+			rs = st.executeQuery("SELECT * FROM `productos` WHERE 1");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			System.out.println("Entra while");
+			while (rs.next()) {
+				System.out.println("primer while");
+				// Se crea un array que será una de las filas de la tabla.
+				Object[] fila = new Object[4]; // Hay tres columnas en la tabla
+
+				// Se rellena cada posición del array con una de las columnas de
+				// la tabla en base de datos.
+				for (int i = 0; i < 4; i++) {
+					fila[i] = rs.getObject(i + 1); // El primer indice en rs es
+													// el 1, no el cero, por eso
+													// se suma 1.
+					System.out.println(" se insertara: " + fila[i]);
 				}
 				// Se añade al modelo la fila completa.
 				EditarProducto.model2.addRow(fila);
@@ -425,6 +670,36 @@ public class Conexion {
 			}
 
 		} catch (SQLException e) {
+			System.out.println("ocurrio un error");
+
+		}
+
+	}
+
+	public void editarProducto(DefaultTableModel modelo, Object[] ids,
+			int longitud) {
+
+		Connection con = Conexion.getConnection();
+		try {
+			for (int x = 0; x < longitud; x++) {
+
+				PreparedStatement pstmt = con
+						.prepareStatement("UPDATE `productos` SET `nombre` = '"
+								+ modelo.getValueAt(x, 1).toString()
+								+ "', `ingredientes` ='"
+								+ modelo.getValueAt(x, 2).toString()
+								+ "', `preparacion` ='"
+								+ modelo.getValueAt(x, 3).toString()
+								+ "', `precioPesos` ='"
+								+ modelo.getValueAt(x, 4).toString()
+								+ "' WHERE id_Producto = '" + ids[x] + "';");
+				 
+				pstmt.executeUpdate();
+			
+			}
+
+		} catch (SQLException e) {
+			System.out.print(e.getMessage());
 			System.out.println("ocurrio un error");
 
 		}
