@@ -7,32 +7,8 @@ Diseño y desarrollo de un sistema de control de inventarios y presentación de 
 Tecnologias de desarrollo:
 Java 
 Windows Builder for Eclipse Mars
-UCanAccess
-
-
-Microsoft Projects
-
-
-
-
-
-//
-TODO:
-
-
-
-
-
-
-//
-
-
-Requisitos funcionales
-
-Producto
-
-Personal
-
-Metricas de software
+phpMyAdmin
+MySql
+ 
 
 
